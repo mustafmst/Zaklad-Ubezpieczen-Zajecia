@@ -1,4 +1,4 @@
-create database projekt;
+
 
 use  projekt;
 
