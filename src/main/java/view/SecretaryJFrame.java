@@ -57,6 +57,12 @@ public class SecretaryJFrame extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldSearchKeyPressed(evt);
+            }
+        });
+
         jTableCustomers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -141,24 +147,30 @@ public class SecretaryJFrame extends javax.swing.JFrame {
         CustomerJFrame addCustomerJFrame = new CustomerJFrame();
         addCustomerJFrame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
-        String search = this.jTextFieldSearch.getText();
+    
+    private void clientSearch(){
+        String[] search = this.jTextFieldSearch.getText().split(" ");
         int searchInt;
+        int tmp;
         List<Customer> wynik = new ArrayList<Customer>();
         DefaultTableModel model = (DefaultTableModel) this.jTableCustomers.getModel();
         model.setRowCount(0);
-        try{
-            searchInt = Integer.parseInt(search);
-        }catch(NumberFormatException e){
-            searchInt = 0;
-        }
         
         try{            
             for(Customer c : this.customerModel.findAll()){
-                if( (search.equals(c.getFirstName())) || (search.equals(c.getLastName())) || (search.equals(c.getEmail())) || (search.equals(c.getAdress())) || (search.equals(c.getPesel())) || (searchInt == c.getPhone()) ){
-                    wynik.add(c);
+                tmp=0;
+                for(String s: search){
+                    try{
+                        searchInt = Integer.parseInt(s);
+                    }catch(NumberFormatException e){
+                        searchInt = 0;
+                    }
+                    if( (s.equals(c.getFirstName())) || (s.equals(c.getLastName())) || (s.equals(c.getEmail())) || (s.equals(c.getAdress())) || (s.equals(c.getPesel())) || (searchInt == c.getPhone()) ){
+                    //wynik.add(c);
+                        tmp++;
+                    }
                 }
+                if(tmp == search.length) wynik.add(c);
             }
         }catch(Exception e){
             
@@ -167,12 +179,24 @@ public class SecretaryJFrame extends javax.swing.JFrame {
         for(Customer c : wynik ){
             model.addRow(new Object[]{c.getFirstName(),c.getLastName(),c.getPesel(),c.getAdress(),c.getEmail(),c.getPhone()});
         }
+        
+    }
+    
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+        clientSearch();
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
     private void jButtonCalendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalendarActionPerformed
         CalendarJFrame calendarFrame = new CalendarJFrame();
         calendarFrame.setVisible(true);
     }//GEN-LAST:event_jButtonCalendarActionPerformed
+
+    private void jTextFieldSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchKeyPressed
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER)
+        {
+            this.clientSearch();
+        }
+    }//GEN-LAST:event_jTextFieldSearchKeyPressed
 
     /**
      * @param args the command line arguments
