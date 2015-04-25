@@ -14,6 +14,7 @@ import javax.swing.*;
  *
  * @author Damian Mamla
  * @author Paweł Mstowski
+ * @author Piotr Filipowicz
  */
 public class LoginJFrame extends javax.swing.JFrame {
 
@@ -54,6 +55,10 @@ public class LoginJFrame extends javax.swing.JFrame {
                     } else if (UserStatus.SECRETARY == status) {
                         SecretaryJFrame secretaryFrame = new SecretaryJFrame();
                         secretaryFrame.setVisible(true);
+                    }
+                    else if (UserStatus.ACCOUNTANT == status) {
+                        AccountantJFrame accountantFrame = new AccountantJFrame();
+                        accountantFrame.setVisible(true);
                     }
                     dispose();
                     break;
