@@ -49,7 +49,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         jButtonAddNewCustomer = new javax.swing.JButton();
         jButtonBack = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Customer");
 
         jLabel1.setText("Pesel");

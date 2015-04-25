@@ -38,9 +38,8 @@ public class CalendarJFrame extends javax.swing.JFrame {
         jPanelCal = new javax.swing.JPanel();
         jButtonBack = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Calendar");
-        setAlwaysOnTop(true);
 
         javax.swing.GroupLayout jPanelCalLayout = new javax.swing.GroupLayout(jPanelCal);
         jPanelCal.setLayout(jPanelCalLayout);
