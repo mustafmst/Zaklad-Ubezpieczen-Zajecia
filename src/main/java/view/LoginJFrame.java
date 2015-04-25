@@ -13,6 +13,7 @@ import javax.swing.*;
 /**
  *
  * @author Damian Mamla
+ * @author Paweł Mstowski
  */
 public class LoginJFrame extends javax.swing.JFrame {
 
