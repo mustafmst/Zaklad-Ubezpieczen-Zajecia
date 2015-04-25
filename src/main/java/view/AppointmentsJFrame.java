@@ -5,25 +5,32 @@
  */
 package view;
 
-import Calendar.Cal;
-import java.awt.Container;
-import java.awt.FlowLayout;
-
 /**
  *
- * @author Paweł
+ * @author Damian Mamla
  */
-public class CalendarJFrame extends javax.swing.JFrame {
-
+public class AppointmentsJFrame extends javax.swing.JFrame {
+    
+    private int day;
+    private int month;
+    private int year;
+    
     /**
-     * Creates new form CalendarJFrame
+     * Creates new form AppointmentsJFrame
      */
-    public CalendarJFrame() {
+    public AppointmentsJFrame() {
+        super();
+    }
+    
+    public AppointmentsJFrame(int dd, int mm, int yy) {
+        super();
         initComponents();
-        Container c = this.jPanelCal;
+        this.day = dd;
+        this.month = mm + 1; //add 1 month because we have indexes from 0
+        this.year = yy;
+        System.out.println("Data: " + dd + mm + yy);
         
-        c.setLayout(new FlowLayout());
-        c.add(new Cal());
+        
     }
 
     /**
@@ -35,23 +42,9 @@ public class CalendarJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelCal = new javax.swing.JPanel();
         jButtonBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Calendar");
-        setAlwaysOnTop(true);
-
-        javax.swing.GroupLayout jPanelCalLayout = new javax.swing.GroupLayout(jPanelCal);
-        jPanelCal.setLayout(jPanelCalLayout);
-        jPanelCalLayout.setHorizontalGroup(
-            jPanelCalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
-        );
-        jPanelCalLayout.setVerticalGroup(
-            jPanelCalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 225, Short.MAX_VALUE)
-        );
 
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
@@ -65,20 +58,16 @@ public class CalendarJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelCal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBack))
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jButtonBack)
+                .addContainerGap(312, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelCal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(240, Short.MAX_VALUE)
+                .addComponent(jButtonBack)
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -105,27 +94,25 @@ public class CalendarJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CalendarJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppointmentsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CalendarJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppointmentsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CalendarJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppointmentsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CalendarJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppointmentsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CalendarJFrame().setVisible(true);
+                new AppointmentsJFrame().setVisible(true);
             }
         });
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBack;
-    private javax.swing.JPanel jPanelCal;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,12 +15,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javafx.scene.chart.PieChart;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import view.AppointmentsJFrame;
+import view.CalendarJFrame;
 
 
 public class Cal extends JPanel {
@@ -30,6 +33,7 @@ public class Cal extends JPanel {
   /** Currently-interesting month and day */
   protected int mm, dd;
 
+  private boolean firstOpen = true;
   /** The buttons to be displayed */
   protected JButton labs[][];
 
@@ -63,6 +67,7 @@ public class Cal extends JPanel {
         calendar.get(Calendar.DAY_OF_MONTH));
     buildGUI();
     recompute();
+    firstOpen = false;
   }
 
   /**
@@ -267,6 +272,15 @@ public class Cal extends JPanel {
     square.setBackground(Color.red);
     square.repaint();
     activeDay = newDay;
+    System.out.println("UUUUUUUUU" + activeDay);
+    if(firstOpen == false) {
+        AppointmentsJFrame appointmentsJFrame = new AppointmentsJFrame(activeDay, mm, yy);
+        
+      /*  mm, activeDay, yy
+        Date currentData = new Date
+        appointmentsJFrame.set*/
+        appointmentsJFrame.setVisible(true);
+    }
   }
 
   /** For testing, a main program */
