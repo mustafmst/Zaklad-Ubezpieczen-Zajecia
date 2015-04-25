@@ -27,6 +27,48 @@ public class LoginJFrame extends javax.swing.JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    
+    public void LoginAction(){
+        
+        try {
+            User user = new User();
+            user.setLogin(this.jTextFieldLogin.getText());
+            user.setPassword(String.valueOf(this.jPasswordField.getPassword()));
+            System.out.println(user.getLogin() + " " + user.getPassword() + " !!!");
+
+            boolean isLogged = false;
+
+            for (User u : this.userModel.findAll()) {
+                System.out.println(this.userModel.genrateMD5(u.getPassword()));
+                if (u.getLogin().equals(user.getLogin()) && this.userModel.genrateMD5(user.getPassword()).equals(u.getPassword())) {
+                    isLogged = true;
+                    System.out.println(user.getLogin() + " " + user.getPassword() + "!!!");
+                    JOptionPane.showMessageDialog(null, "You have logged in successfully", "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    int status = u.getStatus();
+                    System.out.println("Status: " + status);
+                    if (UserStatus.DIRECTOR == status) {
+                        System.out.println("DIRECTOR!!");
+                        DirectorJFrame directorFrame = new DirectorJFrame();
+                        directorFrame.setVisible(true);
+                    } else if (UserStatus.SECRETARY == status) {
+                        SecretaryJFrame secretaryFrame = new SecretaryJFrame();
+                        secretaryFrame.setVisible(true);
+                    }
+                    dispose();
+                    break;
+                }
+            }
+            if (isLogged == false) {
+                JOptionPane.showMessageDialog(null, "Login failed!", "Failed!!",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,6 +90,12 @@ public class LoginJFrame extends javax.swing.JFrame {
         setTitle("Logowanie");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("System Ubezpieczeń"));
+
+        jPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordFieldKeyPressed(evt);
+            }
+        });
 
         jLabel2.setText("Password");
 
@@ -117,44 +165,15 @@ public class LoginJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        try {
-            User user = new User();
-            user.setLogin(this.jTextFieldLogin.getText());
-            user.setPassword(String.valueOf(this.jPasswordField.getPassword()));
-            System.out.println(user.getLogin() + " " + user.getPassword() + " !!!");
-
-            boolean isLogged = false;
-
-            for (User u : this.userModel.findAll()) {
-                System.out.println(this.userModel.genrateMD5(u.getPassword()));
-                if (u.getLogin().equals(user.getLogin()) && this.userModel.genrateMD5(user.getPassword()).equals(u.getPassword())) {
-                    isLogged = true;
-                    System.out.println(user.getLogin() + " " + user.getPassword() + "!!!");
-                    JOptionPane.showMessageDialog(null, "You have logged in successfully", "Success",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    int status = u.getStatus();
-                    System.out.println("Status: " + status);
-                    if (UserStatus.DIRECTOR == status) {
-                        System.out.println("DIRECTOR!!");
-                        DirectorJFrame directorFrame = new DirectorJFrame();
-                        directorFrame.setVisible(true);
-                    } else if (UserStatus.SECRETARY == status) {
-                        SecretaryJFrame secretaryFrame = new SecretaryJFrame();
-                        secretaryFrame.setVisible(true);
-                    }
-                    dispose();
-                    break;
-                }
-            }
-            if (isLogged == false) {
-                JOptionPane.showMessageDialog(null, "Login failed!", "Failed!!",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        LoginAction();
     }//GEN-LAST:event_jButtonLoginActionPerformed
+
+    private void jPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldKeyPressed
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER)
+        {
+            LoginAction();
+        }
+    }//GEN-LAST:event_jPasswordFieldKeyPressed
 
     /**
      * @param args the command line arguments
