@@ -2,6 +2,8 @@
 
 use  projekt;
 
+drop table Appointment;
+drop table Customer;
 drop table User;
 
 create table User(
@@ -18,7 +20,7 @@ INSERT INTO User (login,password,stanowisko,status) VALUES ('Basia',MD5('Basia')
 INSERT INTO User (login,password,stanowisko,status) VALUES ('Kasia',MD5('Kasia'),'Accountant',3 );
 
 
-drop table Customer;
+
 create table Customer(
     pesel varchar(20) not null primary key,	
     firstName varchar(30) not null,
@@ -27,5 +29,19 @@ create table Customer(
     adress varchar(50),
     email varchar(30)
 );
+
+
+create table Appointment(
+    pesel varchar(20) not null primary key,	
+    id_advisor INT,
+    hours DATETIME,
+    
+    FOREIGN KEY (`id_advisor`) REFERENCES `User`(`userId`)
+);
+
+INSERT INTO Appointment (pesel,id_advisor,hours) VALUES ('987654321',1,'2015-04-10 09:00:00');
+INSERT INTO Appointment (pesel,id_advisor,hours) VALUES ('123456789',1,'2015-04-10 09:00:00');
+INSERT INTO Appointment (pesel,id_advisor,hours) VALUES ('543267890',1,'2015-04-10 10:00:00');
+INSERT INTO Appointment (pesel,id_advisor,hours) VALUES ('333333333',1,'2015-04-10 15:00:00');
 
 
