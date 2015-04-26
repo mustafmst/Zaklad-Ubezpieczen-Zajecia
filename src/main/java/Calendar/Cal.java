@@ -22,9 +22,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import model.UserIdentify;
+import model.UserStatus;
+import view.AdvisorJFrame;
 import view.AppointmentsJFrame;
 import view.CalendarJFrame;
-
+import view.LoginJFrame;
 
 public class Cal extends JPanel {
   /** The currently-interesting year (not modulo 1900!) */
@@ -33,7 +36,8 @@ public class Cal extends JPanel {
   /** Currently-interesting month and day */
   protected int mm, dd;
 
-  private boolean firstOpen = true;
+  private boolean firstOpenAppointment = true;
+  private boolean firstOpenAdvisor = true;
   /** The buttons to be displayed */
   protected JButton labs[][];
 
@@ -67,7 +71,8 @@ public class Cal extends JPanel {
         calendar.get(Calendar.DAY_OF_MONTH));
     buildGUI();
     recompute();
-    firstOpen = false;
+    firstOpenAppointment = false;
+    firstOpenAdvisor = false;
   }
 
   /**
@@ -273,13 +278,13 @@ public class Cal extends JPanel {
     square.repaint();
     activeDay = newDay;
     System.out.println("UUUUUUUUU" + activeDay);
-    if(firstOpen == false) {
+    if(firstOpenAppointment == false && UserIdentify.status == UserStatus.SECRETARY) {
         AppointmentsJFrame appointmentsJFrame = new AppointmentsJFrame(activeDay, mm, yy);
-        
-      /*  mm, activeDay, yy
-        Date currentData = new Date
-        appointmentsJFrame.set*/
         appointmentsJFrame.setVisible(true);
+    } 
+    else if(firstOpenAdvisor == false && UserIdentify.status == UserStatus.ADVISOR) {
+        //AdvisorJFrame advisorJFrame = new AdvisorJFrame();
+        //advisorJFrame.setVisible(true);
     }
   }
 
