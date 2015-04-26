@@ -9,7 +9,7 @@ import entities.*;
 import model.*;
 import javax.swing.JOptionPane;
 import javax.swing.*;
-
+import model.UserModel;
 /**
  *
  * @author Damian Mamla
@@ -18,7 +18,7 @@ import javax.swing.*;
 public class LoginJFrame extends javax.swing.JFrame {
 
     private final UserModel userModel = new UserModel();
-
+    
     /**
      * Creates new form LoginJFrame
      */
@@ -134,6 +134,10 @@ public class LoginJFrame extends javax.swing.JFrame {
                             JOptionPane.INFORMATION_MESSAGE);
                     int status = u.getStatus();
                     System.out.println("Status: " + status);
+                    UserIdentify.status = status;
+                    UserIdentify.userId = u.getUserId();
+                    UserIdentify.nazwisko = u.getNazwisko();
+                    UserIdentify.imie = u.getImie();
                     if (UserStatus.DIRECTOR == status) {
                         System.out.println("DIRECTOR!!");
                         DirectorJFrame directorFrame = new DirectorJFrame();
@@ -141,6 +145,9 @@ public class LoginJFrame extends javax.swing.JFrame {
                     } else if (UserStatus.SECRETARY == status) {
                         SecretaryJFrame secretaryFrame = new SecretaryJFrame();
                         secretaryFrame.setVisible(true);
+                    } else if (UserStatus.ADVISOR == status) {
+                        AdvisorJFrame advisorJFrame = new AdvisorJFrame();
+                        advisorJFrame.setVisible(true);
                     }
                     dispose();
                     break;

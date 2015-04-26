@@ -5,6 +5,8 @@
  */
 package model;
 
+import entities.User;
+
 /**
  *
  * @author Damian Mamla
@@ -16,4 +18,5 @@ public final class UserStatus {
     public static final int SECRETARY = 2;
     public static final int ACCOUNTANT = 3;
     public static final int ADVISOR = 4;
+
 }
