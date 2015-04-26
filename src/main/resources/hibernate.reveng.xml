@@ -4,4 +4,5 @@
     <schema-selection match-catalog="projekt"/>
     <table-filter match-name="user"/>
     <table-filter match-name="customer"/>
+    <table-filter match-name="service"/>
 </hibernate-reverse-engineering>

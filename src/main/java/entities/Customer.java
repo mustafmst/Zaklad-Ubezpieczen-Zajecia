@@ -6,11 +6,15 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * 
@@ -21,6 +25,8 @@ import javax.persistence.Table;
 @Table(name = "customer")
 
 public class Customer implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "peselFk")
+    private Collection<Service> serviceCollection;
     
     @Column(name = "firstName")
     private String firstName;
@@ -100,6 +106,15 @@ public class Customer implements Serializable {
 
     public void setPesel(String pesel) {
         this.pesel = pesel;
+    }
+
+    @XmlTransient
+    public Collection<Service> getServiceCollection() {
+        return serviceCollection;
+    }
+
+    public void setServiceCollection(Collection<Service> serviceCollection) {
+        this.serviceCollection = serviceCollection;
     }
 
     
