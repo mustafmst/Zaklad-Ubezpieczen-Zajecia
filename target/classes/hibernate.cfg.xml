@@ -10,5 +10,6 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <mapping class="entities.User"/>  
         <mapping class="entities.Customer"/> 
+        <mapping class="entities.Service"/>
     </session-factory>
 </hibernate-configuration>

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author Damian Mamla
  */
 public class UserModel extends AbstractModel<User> {
-
+ 
     public UserModel() {
         super(User.class);
     }
