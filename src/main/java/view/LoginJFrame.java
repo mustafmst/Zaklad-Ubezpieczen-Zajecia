@@ -92,9 +92,9 @@ public class LoginJFrame extends javax.swing.JFrame {
         jButtonLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Logowanie");
+        setTitle("Login");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("System Ubezpieczeń"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Insurance system"));
 
         jPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

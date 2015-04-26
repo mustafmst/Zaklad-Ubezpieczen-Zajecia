@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 package view;
-
+import entities.Customer;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import model.CustomerModel;
 
 /**
  *
@@ -13,6 +17,8 @@ import javax.swing.*;
  */
 public class AccountantJFrame extends javax.swing.JFrame {
 
+    private final CustomerModel customerModel = new CustomerModel();
+    
     /**
      * Creates new form AccountantJFrame
      */
@@ -21,6 +27,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        transactionView();
     }
 
     /**
@@ -32,21 +39,75 @@ public class AccountantJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableAccountant = new javax.swing.JTable();
+        GeneratePDFjButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTableAccountant.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Advisor", "Customer", "Description", "Insurance Price", "Service Price", "Cost"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableAccountant);
+
+        GeneratePDFjButton.setText("Generate PDF");
+        GeneratePDFjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GeneratePDFjButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(GeneratePDFjButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(GeneratePDFjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void transactionView(){
+        List<Customer> wynik = new ArrayList<Customer>();
+        DefaultTableModel model = (DefaultTableModel) this.jTableAccountant.getModel();
+        model.setRowCount(0);
+        try{
+            for(Customer c : this.customerModel.findAll()){
+                wynik.add(c);
+            }
+        }catch(Exception e){
+            
+        }
+        
+        for(Customer c : wynik ){
+            model.addRow(new Object[]{c.getFirstName(),c.getLastName(),c.getPesel(),c.getAdress(),c.getEmail(),c.getPhone()});
+        }
+    }
+    
+    private void GeneratePDFjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneratePDFjButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GeneratePDFjButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,10 +141,14 @@ public class AccountantJFrame extends javax.swing.JFrame {
             @Override
             public void run() {
                 new AccountantJFrame().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton GeneratePDFjButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableAccountant;
     // End of variables declaration//GEN-END:variables
 }
