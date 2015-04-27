@@ -13,6 +13,7 @@ import entities.User;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import model.UserModel;
+import model.UserStatus;
 
 public class EmployeeJFrame extends javax.swing.JFrame {
 
@@ -38,9 +39,13 @@ private final UserModel userModel = new UserModel();
         jLabelStatus = new javax.swing.JLabel();
         jTextFieldLogin = new javax.swing.JTextField();
         jTextFieldPassword = new javax.swing.JTextField();
-        jTextFieldStatus = new javax.swing.JTextField();
         jButtonAddNewEmployee = new javax.swing.JButton();
         jButtonBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldImie = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldNazwisko = new javax.swing.JTextField();
+        jComboBoxStatus = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +64,12 @@ private final UserModel userModel = new UserModel();
 
         jButtonBack.setText("Back");
 
+        jLabel1.setText("Imię");
+
+        jLabel2.setText("Nazwisko");
+
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADVISOR", "SECRETARY", "ACCOUNTANT", "DIRECTOR" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,43 +77,55 @@ private final UserModel userModel = new UserModel();
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButtonAddNewEmployee)
-                        .addGap(41, 41, 41)
-                        .addComponent(jButtonBack))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelLogin)
                             .addComponent(jLabelPassword)
-                            .addComponent(jLabelStatus))
-                        .addGap(41, 41, 41)
+                            .addComponent(jLabelLogin)
+                            .addComponent(jLabelStatus)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(jTextFieldPassword)
-                            .addComponent(jTextFieldStatus))))
-                .addContainerGap(139, Short.MAX_VALUE))
+                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(jTextFieldImie)
+                            .addComponent(jTextFieldNazwisko)
+                            .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jButtonAddNewEmployee)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonBack)))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldImie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldNazwisko, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelLogin)
                     .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPassword)
                     .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelStatus)
-                    .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                    .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddNewEmployee)
                     .addComponent(jButtonBack))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         pack();
@@ -112,22 +135,28 @@ private final UserModel userModel = new UserModel();
         try {
             
             User user = new User();
+            String imie = this.jTextFieldImie.getText();
+            String nazwisko = this.jTextFieldNazwisko.getText();
             String login = this.jTextFieldLogin.getText();
             String password = this.jTextFieldPassword.getText();
             
-            String status = this.jTextFieldStatus.getText();
+            String status = jComboBoxStatus.getSelectedItem().toString();
             int statusInt = 0;
-            if("Advisor".equals(status))
+            if("ADVISOR".equals(status))
             {
-                statusInt = 4;
+                statusInt = UserStatus.ADVISOR;
             }
-            else if("Secretary".equals(status))
+            else if("SECRETARY".equals(status))
             {
-                statusInt = 2;
+                statusInt = UserStatus.SECRETARY;
             }  
-            else if("Accountant".equals(status))
+            else if("ACCOUNTANT".equals(status))
             {
-                statusInt = 3;
+                statusInt = UserStatus.ACCOUNTANT;
+            }
+              else if("DIRECTOR".equals(status))
+            {
+                statusInt = UserStatus.DIRECTOR;
             }
             String showInputDialog = null;
             boolean isFill = true;
@@ -141,12 +170,20 @@ private final UserModel userModel = new UserModel();
             } else if (status.isEmpty()) {
                 showInputDialog = "status";
                 isFill = false;
+            } else if (imie.isEmpty()) {
+                showInputDialog = "imie";
+                isFill = false;
+            } else if (nazwisko.isEmpty()) {
+                showInputDialog = "nazwisko";
+                isFill = false;
             } 
            
             if (isFill != false) {
+                user.setImie(this.jTextFieldImie.getText());
+                user.setNazwisko(this.jTextFieldNazwisko.getText());
                 user.setLogin(this.jTextFieldLogin.getText());
                 user.setPassword(this.jTextFieldPassword.getText());
-                user.setStanowisko(this.jTextFieldStatus.getText());
+                user.setStanowisko(status);
                 user.setStatus(statusInt);
              
             }
@@ -160,7 +197,7 @@ private final UserModel userModel = new UserModel();
                 String pass = this.userModel.genrateMD5(password);
                 user.setPassword(pass);
                 
-                user.setStanowisko(this.jTextFieldStatus.getText());
+                user.setStanowisko(status);
                 user.setStatus(statusInt);
                 this.userModel.create(user);
                 JOptionPane.showMessageDialog(null, "Add new employee successful");
@@ -215,11 +252,15 @@ private final UserModel userModel = new UserModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddNewEmployee;
     private javax.swing.JButton jButtonBack;
+    private javax.swing.JComboBox jComboBoxStatus;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelStatus;
+    private javax.swing.JTextField jTextFieldImie;
     private javax.swing.JTextField jTextFieldLogin;
+    private javax.swing.JTextField jTextFieldNazwisko;
     private javax.swing.JTextField jTextFieldPassword;
-    private javax.swing.JTextField jTextFieldStatus;
     // End of variables declaration//GEN-END:variables
 }
