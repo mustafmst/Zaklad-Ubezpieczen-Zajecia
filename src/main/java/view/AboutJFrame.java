@@ -36,7 +36,7 @@ public class AboutJFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("About");
 
         jTextArea1.setEditable(false);
@@ -56,7 +56,6 @@ public class AboutJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\P\\Desktop\\Zaklad-Ubezpieczen-Zajecia\\res\\icon.png")); // NOI18N
         jLabel2.setMaximumSize(new java.awt.Dimension(1062, 1024));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
