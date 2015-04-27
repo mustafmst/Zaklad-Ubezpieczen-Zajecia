@@ -27,6 +27,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
     
     private final UserModel user = new UserModel();
     private final AppointmentModel appointment = new AppointmentModel();
+    private final CustomerModel customer = new CustomerModel();
     
     /**
      * Creates new form AppointmentsJFrame
@@ -56,6 +57,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     
     public final void createTable(){
+        Customer tmp;
         DefaultTableModel model = (DefaultTableModel) this.jAppointmentTable.getModel();
 //        model.setValueAt("pesel_1", 2, 3);
         Vector<Integer> advisors = new Vector<Integer>();
@@ -70,7 +72,8 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
         System.out.println("Ile:   "+app.size());
         for(Appointment A : app){
             System.out.println("Pesel:   "+A.getPesel()+"  godzina:  "+(A.getHours().getHours())+"  doradca:  "+advisors.indexOf(A.getId_advisor()));
-            model.setValueAt(A.getPesel(), A.getHours().getHours()-8,advisors.indexOf(A.getId_advisor()) );
+            tmp = this.customer.find(A.getPesel());
+            model.setValueAt(tmp.getFirstName()+" "+tmp.getLastName(), A.getHours().getHours()-8,advisors.indexOf(A.getId_advisor()) );
         }
         
     }
