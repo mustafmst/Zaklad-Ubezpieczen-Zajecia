@@ -5,4 +5,5 @@
     <table-filter match-name="user"/>
     <table-filter match-name="customer"/>
     <table-filter match-name="service"/>
+    <table-filter match-name="appointment"/>
 </hibernate-reverse-engineering>

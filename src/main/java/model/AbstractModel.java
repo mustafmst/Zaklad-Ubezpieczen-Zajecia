@@ -34,7 +34,7 @@ public abstract class AbstractModel<T> {
                 sessionFactory.getCurrentSession().getTransaction().begin();
             }
             return sessionFactory.getCurrentSession()
-                    .createQuery("from " + entityClass.getName()).list();
+                    .createQuery("from " + entityClass.getSimpleName()).list();
         } catch (RuntimeException re) {
             return null;
         }

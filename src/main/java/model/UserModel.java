@@ -8,8 +8,13 @@ package model;
 import entities.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -36,5 +41,24 @@ public class UserModel extends AbstractModel<User> {
             Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return sb.toString();
+    }
+    
+    public List<User> findId_advisors() {
+        List<User> users = new ArrayList<User>();
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            String sql = "SELECT * FROM User WHERE status = 4";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.addEntity(User.class);
+            List results = query.list();
+            for (Object l : results) {
+                users.add((User)l);
+            }
+            session.getTransaction().commit();
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        return users;
     }
 }
