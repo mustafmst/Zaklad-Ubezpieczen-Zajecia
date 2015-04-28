@@ -160,7 +160,7 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("Insurence System");
+        jLabel4.setText("Insurance System");
 
         jButtonAbout.setText("About");
         jButtonAbout.addActionListener(new java.awt.event.ActionListener() {
