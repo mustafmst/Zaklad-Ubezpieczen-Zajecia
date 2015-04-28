@@ -1,5 +1,4 @@
 
-
 use  projekt;
 
 drop table Appointment;
@@ -55,17 +54,14 @@ create table Appointment(
     id_advisor int not null,
     dateofAddAppointment date not null, 
     hours time not null,
-    
     FOREIGN KEY (id_advisor) REFERENCES User(userId)
 );
-
 
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('987654321',2,'2015-04-10', '09:00:00');
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('123456799',5,'2015-04-10', '09:00:00');
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('543267890',2,'2015-04-10', '10:00:00');
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('333333333',5,'2015-04-10', '14:00:00');
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('123456789',5,'2015-04-10', '08:00:00');
-
 
 select * from Appointment;
 #insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dataOfAddService) Values

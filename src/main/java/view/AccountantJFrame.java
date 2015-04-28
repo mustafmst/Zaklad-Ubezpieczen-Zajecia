@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package view;
-import entities.Customer;
+import entities.Service;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import model.CustomerModel;
+import model.ServiceModel;
 
 /**
  *
@@ -17,7 +17,7 @@ import model.CustomerModel;
  */
 public class AccountantJFrame extends javax.swing.JFrame {
 
-    private final CustomerModel customerModel = new CustomerModel();
+    private final ServiceModel serviceModel = new ServiceModel();
     
     /**
      * Creates new form AccountantJFrame
@@ -50,9 +50,10 @@ public class AccountantJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Advisor", "Customer", "Description", "Insurance Price", "Service Price", "Cost"
+                "Advisor", "Customer", "Description", "Insurance Price", "Service Price", "Cost", "Date"
             }
         ));
+        jTableAccountant.setRowHeight(32);
         jScrollPane1.setViewportView(jTableAccountant);
 
         GeneratePDFjButton.setText("Generate PDF");
@@ -89,19 +90,19 @@ public class AccountantJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void transactionView(){
-        List<Customer> wynik = new ArrayList<Customer>();
+        List<Service> wynik = new ArrayList<Service>();
         DefaultTableModel model = (DefaultTableModel) this.jTableAccountant.getModel();
         model.setRowCount(0);
         try{
-            for(Customer c : this.customerModel.findAll()){
+            for(Service c : this.serviceModel.findAll()){
                 wynik.add(c);
             }
         }catch(Exception e){
             
         }
         
-        for(Customer c : wynik ){
-            model.addRow(new Object[]{c.getFirstName(),c.getLastName(),c.getPesel(),c.getAdress(),c.getEmail(),c.getPhone()});
+        for(Service c : wynik ){
+            model.addRow(new Object[]{c.getUserFk(),c.getPeselFk(),c.getDescription(),c.getInsuranceCost(),c.getServiceCost(),c.getInsuranceCost()+c.getServiceCost(),c.getDataOfAddService()});
         }
     }
     

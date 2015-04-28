@@ -27,6 +27,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jTextFieldLogin.requestFocus();
     }
     
     public void LoginAction(){
