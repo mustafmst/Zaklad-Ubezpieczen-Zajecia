@@ -181,6 +181,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         AddAppointmentJFrame addAppointmentFrame = new AddAppointmentJFrame(day,month,year);
         addAppointmentFrame.setVisible(true);
+        createTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

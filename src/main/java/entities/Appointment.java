@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,6 +27,12 @@ import javax.persistence.TemporalType;
 @Table(name = "appointment")
 
 public class Appointment implements Serializable{
+     
+    @Id
+    @Column(name = "appointmentId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer appointmentId;
+    
     
     @Column(name = "id_advisor")
     private int id_advisor;
@@ -36,19 +44,27 @@ public class Appointment implements Serializable{
     @Column(name = "dateofAddAppointment")
     @Temporal(TemporalType.DATE)
     private Date dateofAddAppointment;
-    
-    @Id
+   
     @Column(name = "pesel")
     private String pesel;
     
     public Appointment(){
     }
     
-    public Appointment(String pesel,int id_advisor,Date dateofAddAppointment,Time hours){
+    public Appointment(Integer appointmentId, String pesel,int id_advisor,Date dateofAddAppointment,Time hours){
+        this.appointmentId = appointmentId;
         this.pesel = pesel;
         this.id_advisor = id_advisor;
         this.dateofAddAppointment = dateofAddAppointment;
         this.hours = hours;
+    }
+    
+    public Integer getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(Integer appointmentId) {
+        this.appointmentId = appointmentId;
     }
     
     public void setPesel(String pesel){

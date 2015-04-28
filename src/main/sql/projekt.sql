@@ -34,6 +34,10 @@ create table Customer(
     email varchar(30)
 );
 INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('123456789','Kamil','Bartu',276456321, '33-123 Kolo','kamil@bartu.com' );
+INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('987654321','Beata','Koza',876543232, '33-123 Kolo','kamil@bartu.com' );
+INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('123456799','Pawel','Gosc',124124124, '33-123 Kolo','kamil@bartu.com' );
+INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('543267890','Michal','Git',154654734, '33-123 Kolo','kamil@bartu.com' );
+INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('333333333','Monika','Siema',457453453, '33-123 Kolo','kamil@bartu.com' );
 
 #select * from Customer;
 
@@ -51,6 +55,7 @@ create table Service (
 select * from Service;
 
 create table Appointment(
+	appointmentId int primary key not null auto_increment,
     pesel varchar(20) not null,	
     id_advisor int not null,
     dateofAddAppointment date not null, 
