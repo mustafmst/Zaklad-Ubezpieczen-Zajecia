@@ -43,7 +43,7 @@ public class AboutJFrame extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Rafał Dziubaczka\nPiotr Filipowicz\nMichał Niemiec\nDamian Mamla\nPaweł Mstwoski");
+        jTextArea1.setText("Rafał Dziubaczka\nPiotr Filipowicz\nMichał Niemiec\nDamian Mamla\nPaweł Mstowski");
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabelDesc.setText("Application supporting the work of an insurance company.");
@@ -108,8 +108,6 @@ public class AboutJFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
-
-        jLabelVersion.getAccessibleContext().setAccessibleName("Version: 0.7.1 (2015)");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

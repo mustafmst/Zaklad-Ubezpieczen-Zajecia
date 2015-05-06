@@ -9,4 +9,4 @@ Rafał Dziubaczka
 Piotr Filipowicz
 Michał Niemiec
 Damian Mamla
-Paweł Mstwoski
+Paweł Mstowski
