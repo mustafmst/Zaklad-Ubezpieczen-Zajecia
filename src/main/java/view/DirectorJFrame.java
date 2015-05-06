@@ -108,6 +108,11 @@ public class DirectorJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableCustomers);
 
         jButtonLogout.setText("Logout");
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,6 +187,12 @@ public class DirectorJFrame extends javax.swing.JFrame {
             this.clientSearch();
         }
     }//GEN-LAST:event_jTextFieldSearchKeyPressed
+
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        LoginJFrame loginFrame = new LoginJFrame();
+        loginFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
     
     private void clientSearch(){
         String[] search = this.jTextFieldSearch.getText().split(" ");

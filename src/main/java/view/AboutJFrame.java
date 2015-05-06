@@ -59,12 +59,17 @@ public class AboutJFrame extends javax.swing.JFrame {
 
         jLabelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png"))); // NOI18N
         jLabelIcon.setMaximumSize(new java.awt.Dimension(1062, 1024));
+        jLabelIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelIconMouseClicked(evt);
+            }
+        });
 
         jLabelName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelName.setText("Insurance system");
 
         jLabelVersion.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        jLabelVersion.setText("Version: 0.5 (2015)");
+        jLabelVersion.setText("Version: 0.7.1 (2015)");
 
         jLabelAuthors.setText("Authors:");
 
@@ -104,6 +109,8 @@ public class AboutJFrame extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jLabelVersion.getAccessibleContext().setAccessibleName("Version: 0.7.1 (2015)");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -115,6 +122,10 @@ public class AboutJFrame extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jLabelWebsiteMouseClicked
+
+    private void jLabelIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconMouseClicked
+        dispose();
+    }//GEN-LAST:event_jLabelIconMouseClicked
 
     /**
      * @param args the command line arguments

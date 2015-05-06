@@ -1,5 +1,12 @@
 # Zaklad-Ubezpieczen-Zajecia
-Aplikacja do wspomagania pracy zakladu ubazpieczen i doradztwa
+Aplikacja do wspomagania pracy zakladu ubezpieczen i doradztwa
 
+(c) 2015
 
-test
+Authors:
+--------------------
+Rafał Dziubaczka
+Piotr Filipowicz
+Michał Niemiec
+Damian Mamla
+Paweł Mstwoski

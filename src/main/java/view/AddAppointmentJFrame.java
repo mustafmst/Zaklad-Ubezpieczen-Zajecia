@@ -73,6 +73,7 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
         jButtonAddNewAppointment = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Add Appointment");
 
         jLabel1.setText("Pesel");
 
