@@ -47,6 +47,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         jButtonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
         jTableAccountant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

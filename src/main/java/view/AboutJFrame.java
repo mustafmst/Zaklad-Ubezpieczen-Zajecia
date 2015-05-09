@@ -39,6 +39,7 @@ public class AboutJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("About");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -58,6 +59,7 @@ public class AboutJFrame extends javax.swing.JFrame {
         });
 
         jLabelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png"))); // NOI18N
+        jLabelIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelIcon.setMaximumSize(new java.awt.Dimension(1062, 1024));
         jLabelIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -69,7 +71,7 @@ public class AboutJFrame extends javax.swing.JFrame {
         jLabelName.setText("Insurance system");
 
         jLabelVersion.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        jLabelVersion.setText("Version: 0.7.1 (2015)");
+        jLabelVersion.setText("Version: 0.7.2 (2015)");
 
         jLabelAuthors.setText("Authors:");
 

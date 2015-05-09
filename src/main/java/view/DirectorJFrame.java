@@ -50,6 +50,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
         jButtonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
         jLabel3.setText("Add new employee");
 

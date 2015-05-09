@@ -58,6 +58,7 @@ public class ServiceJFrame extends javax.swing.JFrame {
         jButtonBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
         jLabel1.setText("Customer Pesel");
 

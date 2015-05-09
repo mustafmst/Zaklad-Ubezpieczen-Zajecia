@@ -50,6 +50,7 @@ public class SecretaryJFrame extends javax.swing.JFrame {
         jButtonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
