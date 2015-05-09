@@ -11,6 +11,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import model.ServiceModel;
 
+import pdf.GeneratePDF;
+
 /**
  *
  * @author Piotr Filipowicz
@@ -121,7 +123,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
     }
     
     private void GeneratePDFjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneratePDFjButtonActionPerformed
-        // TODO add your handling code here:
+        new GeneratePDF();
     }//GEN-LAST:event_GeneratePDFjButtonActionPerformed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
