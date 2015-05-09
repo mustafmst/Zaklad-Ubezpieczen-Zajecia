@@ -23,11 +23,13 @@ import java.util.Calendar;
  */
 public class GeneratePDF {
     
+    /*
     public static final String RESULT = "accountant.pdf";
     
     public static void main(String[] args) throws DocumentException, IOException {
     	new GeneratePDF().createPdf(RESULT);
     }
+    */
     
     public void createPdf(String filename)
 	throws DocumentException, IOException {

@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 package view;
+import com.itextpdf.text.DocumentException;
 import entities.Service;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import model.ServiceModel;
@@ -123,8 +127,18 @@ public class AccountantJFrame extends javax.swing.JFrame {
         }
     }
     
+    public static final String RESULT = "accountant.pdf";
+    
     private void GeneratePDFjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneratePDFjButtonActionPerformed
-        new GeneratePDF();
+        try {
+            new GeneratePDF().createPdf(RESULT);
+        } catch (DocumentException ex) {
+            Logger.getLogger(AccountantJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AccountantJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Document accountant.pdf has been generated!", "Success",
+        JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GeneratePDFjButtonActionPerformed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
