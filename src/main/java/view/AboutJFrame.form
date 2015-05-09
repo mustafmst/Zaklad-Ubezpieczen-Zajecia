@@ -130,7 +130,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="2"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Version: 0.7.2 (2015)"/>
+        <Property name="text" type="java.lang.String" value="Version: 0.7.5 (2015)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelAuthors">

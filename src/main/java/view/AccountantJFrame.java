@@ -6,12 +6,15 @@
 package view;
 import com.itextpdf.text.DocumentException;
 import entities.Service;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import model.ServiceModel;
 
@@ -127,17 +130,38 @@ public class AccountantJFrame extends javax.swing.JFrame {
         }
     }
     
-    public static final String RESULT = "accountant.pdf";
-    
     private void GeneratePDFjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneratePDFjButtonActionPerformed
+        String filepath = "accountant.pdf";
+        
+        FileFilter pdf = new FileNameExtensionFilter("PDF File","pdf");
+        File workingDirectory = new File(System.getProperty("user.dir"));
+        
+        JFileChooser fs = new JFileChooser();
+        fs.setDialogTitle("Save file as...");
+        fs.addChoosableFileFilter(pdf);
+        fs.setFileFilter(pdf);
+        fs.setCurrentDirectory(workingDirectory);
+
+        int result = fs.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File fi = fs.getSelectedFile();
+            try {
+                filepath = fi.getPath()+".pdf";
+            }
+            catch (Exception e2) {
+                JOptionPane.showMessageDialog(null, e2.getMessage());
+            }
+        }
+
         try {
-            new GeneratePDF().createPdf(RESULT);
+            new GeneratePDF().createPdf(filepath);
         } catch (DocumentException ex) {
             Logger.getLogger(AccountantJFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(AccountantJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Document accountant.pdf has been generated!", "Success",
+        
+        JOptionPane.showMessageDialog(null, "Document "+filepath+" has been generated!", "Success",
         JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GeneratePDFjButtonActionPerformed
 
@@ -190,4 +214,5 @@ public class AccountantJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAccountant;
     // End of variables declaration//GEN-END:variables
+
 }
