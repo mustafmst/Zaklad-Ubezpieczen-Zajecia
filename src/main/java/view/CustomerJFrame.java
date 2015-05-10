@@ -9,7 +9,8 @@ import entities.Customer;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import model.CustomerModel;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
  * @author Damian Mamla
@@ -156,7 +157,16 @@ public class CustomerJFrame extends javax.swing.JFrame {
             String phone = this.jTextFieldPhone.getText();
             String showInputDialog = null;
             boolean isFill = true;
-
+                  if((EmailValidation(email))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid email. Please enter correct email.");
+                return;
+            }   else
+                     if((PeselValidation(pesel))==false)
+                     {
+                        JOptionPane.showMessageDialog(null, "Invalid pesel. Please enter correct pesel."); 
+                        return;
+                     }
             if (email.isEmpty()) {
                 showInputDialog = "email";
                 isFill = false;
@@ -185,7 +195,8 @@ public class CustomerJFrame extends javax.swing.JFrame {
                 customer.setPesel(this.jTextFieldPesel.getText());
                 foundCustomer = this.customerModel.findCustomer(customer);
             }
-
+           
+                 
             if (isFill == false) {
                 JOptionPane.showMessageDialog(null, "Fill field: " + showInputDialog);
             } else if (foundCustomer == null) {
@@ -252,7 +263,32 @@ public class CustomerJFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public boolean EmailValidation(String customerEmail)
+    {
+       String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+ 
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(customerEmail);
+       
+       return matcher.matches();
+    }
+       public static boolean PeselValidation(String customerPesel) {
+           int[] wagi = {1, 3, 7, 9, 1, 3, 7 ,9 ,1 ,3};
+           if (customerPesel.length() != 11) return false;
+           
+           int suma = 0;
+           
+           for (int i = 0; i < 10; i++)
+               suma += Integer.parseInt(customerPesel.substring(i, i+1)) * wagi[i];
+           int cyfraKontrolna = Integer.parseInt(customerPesel.substring(10, 11));
+           
+           suma %= 10;
+           suma = 10 - suma;
+           suma %= 10;
+           
+           return (suma == cyfraKontrolna);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddNewCustomer;
     private javax.swing.JButton jButtonBack;
