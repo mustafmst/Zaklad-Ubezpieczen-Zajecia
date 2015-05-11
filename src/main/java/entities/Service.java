@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Service.findByServiceCost", query = "SELECT s FROM Service s WHERE s.serviceCost = :serviceCost"),
     @NamedQuery(name = "Service.findByInsuranceCost", query = "SELECT s FROM Service s WHERE s.insuranceCost = :insuranceCost"),
     @NamedQuery(name = "Service.findByDescription", query = "SELECT s FROM Service s WHERE s.description = :description"),
-    @NamedQuery(name = "Service.findByDataOfAddService", query = "SELECT s FROM Service s WHERE s.dataOfAddService = :dataOfAddService")})
+    @NamedQuery(name = "Service.findByDateOfAddService", query = "SELECT s FROM Service s WHERE s.dateOfAddService = :dateOfAddService"),
+    @NamedQuery(name = "Service.findByDateOfService", query = "SELECT s FROM Service s WHERE s.dateOfService = :dateOfService")})
 public class Service implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,24 +46,27 @@ public class Service implements Serializable {
     private Integer serviceId;
     @Basic(optional = false)
     @Column(name = "serviceCost")
-    private int serviceCost;
+    private float serviceCost;
     @Basic(optional = false)
     @Column(name = "insuranceCost")
-    private int insuranceCost;
+    private float insuranceCost;
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
-    @Column(name = "dataOfAddService")
+    @Column(name = "dateOfAddService")
     @Temporal(TemporalType.DATE)
-    private Date dataOfAddService;
+    private Date dateOfAddService;
     @JoinColumn(name = "pesel_fk", referencedColumnName = "pesel")
     @ManyToOne(optional = false)
     private Customer peselFk;
     @JoinColumn(name = "user_fk", referencedColumnName = "userId")
     @ManyToOne(optional = false)
     private User userFk;
-
+    @Basic(optional = false)
+    @Column(name = "dateOfService")
+    @Temporal(TemporalType.DATE)
+    private Date dateOfService;
     public Service() {
     }
 
@@ -70,12 +74,13 @@ public class Service implements Serializable {
         this.serviceId = serviceId;
     }
 
-    public Service(Integer serviceId, int serviceCost, int insuranceCost, String description, Date dataOfAddService) {
+    public Service(Integer serviceId, float serviceCost, float insuranceCost, String description, Date dateOfAddService, Date dateOfService) {
         this.serviceId = serviceId;
         this.serviceCost = serviceCost;
         this.insuranceCost = insuranceCost;
         this.description = description;
-        this.dataOfAddService = dataOfAddService;
+        this.dateOfAddService = dateOfAddService;
+        this.dateOfService = dateOfService;
     }
 
     public Integer getServiceId() {
@@ -86,19 +91,19 @@ public class Service implements Serializable {
         this.serviceId = serviceId;
     }
 
-    public int getServiceCost() {
+    public float getServiceCost() {
         return serviceCost;
     }
 
-    public void setServiceCost(int serviceCost) {
+    public void setServiceCost(float serviceCost) {
         this.serviceCost = serviceCost;
     }
 
-    public int getInsuranceCost() {
+    public float getInsuranceCost() {
         return insuranceCost;
     }
 
-    public void setInsuranceCost(int insuranceCost) {
+    public void setInsuranceCost(float insuranceCost) {
         this.insuranceCost = insuranceCost;
     }
 
@@ -109,13 +114,21 @@ public class Service implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Date getDataOfAddService() {
-        return dataOfAddService;
+    
+    public Date getDateOfService() {
+        return dateOfService;
     }
 
-    public void setDataOfAddService(Date dataOfAddService) {
-        this.dataOfAddService = dataOfAddService;
+    public void setDateOfService(Date dateOfService) {
+        this.dateOfService = dateOfService;
+    }
+    
+    public Date getDateOfAddService() {
+        return dateOfAddService;
+    }
+
+    public void setDateOfAddService(Date dateOfAddService) {
+        this.dateOfAddService = dateOfAddService;
     }
 
     public Customer getPeselFk() {

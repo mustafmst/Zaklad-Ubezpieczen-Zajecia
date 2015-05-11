@@ -31,6 +31,7 @@ import view.AdvisorJFrame;
 import view.AppointmentsJFrame;
 import view.CalendarJFrame;
 import view.LoginJFrame;
+import view.ServiceJFrame;
 
 public class Cal extends JPanel {
   /** The currently-interesting year (not modulo 1900!) */
@@ -318,14 +319,16 @@ public class Cal extends JPanel {
     //square.setBackground(Color.red);
     //square.repaint();
     activeDay = newDay;
-    System.out.println("UUUUUUUUU" + activeDay);
+    System.out.println("UUUUUUUUU" + activeDay + " " + mm + " " + yy);
     if(firstOpenAppointment == false && UserIdentify.status == UserStatus.SECRETARY) {
+        System.out.println("Tu");
         AppointmentsJFrame appointmentsJFrame = new AppointmentsJFrame(activeDay, mm, yy);
         appointmentsJFrame.setVisible(true);
     } 
     else if(firstOpenAdvisor == false && UserIdentify.status == UserStatus.ADVISOR) {
-        //AdvisorJFrame advisorJFrame = new AdvisorJFrame();
-        //advisorJFrame.setVisible(true);
+        System.out.println("Tam");
+        ServiceJFrame serviceJFrame = new ServiceJFrame(activeDay, mm, yy);
+        serviceJFrame.setVisible(true);
     }
   }
   

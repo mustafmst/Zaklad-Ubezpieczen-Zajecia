@@ -10,8 +10,12 @@ import entities.Service;
 import entities.User;
 import java.awt.HeadlessException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.ServiceModel;
@@ -24,15 +28,26 @@ import model.UserIdentify;
 public class ServiceJFrame extends javax.swing.JFrame {
 
     private final ServiceModel serviceModel = new ServiceModel();
-
+    private int day;
+    private int month;
+    private int year;
     /**
      * Creates new form ServiceJFrame
      *
      *
      */
     public ServiceJFrame() {
+        super();
+    }
+    
+    
+    public ServiceJFrame(int dd, int mm, int yy) {
         super("Add Service");
         initComponents();
+        
+        this.day = dd;
+        this.month = mm + 1; //add 1 month because we have indexes from 0
+        this.year = yy;
         setVisible(true);
     }
 
@@ -170,24 +185,26 @@ public class ServiceJFrame extends javax.swing.JFrame {
 
         Service service = new Service();
         String pesel = this.jTextFieldCustomer.getText();
-        Integer serviceCost = Integer.parseInt(this.jTextFieldServiceCost.getText());
-        Integer insuranceCost = Integer.parseInt(this.jTextFieldInsuranceCost.getText());
+        Float serviceCost = Float.parseFloat(this.jTextFieldServiceCost.getText());
+        Float insuranceCost = Float.parseFloat(this.jTextFieldInsuranceCost.getText());
         String description = this.jTextAreaDescription.getText();
         Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        System.out.println("Date " + dateFormat.format(cal.getTime()));
-
+        DateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy");
+   
         if (pesel.isEmpty() || serviceCost == null || insuranceCost == null || description.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fill field: ");
         } else {
             try {
                 User user = new User();
                 user.setUserId(UserIdentify.userId);
-
                 Customer customer = new Customer();
                 customer.setPesel(pesel);
-
-                service.setDataOfAddService(cal.getTime());
+                service.setDateOfAddService(cal.getTime());
+                String y = Integer.toString(year);
+                String m = Integer.toString(month);
+                String d = Integer.toString(day);
+                String stringDate = d + "-" + m + "-" + y;
+                service.setDateOfService(dateFormat.parse(stringDate));
                 service.setDescription(description);
                 service.setInsuranceCost(insuranceCost);
                 service.setPeselFk(customer);
@@ -198,6 +215,8 @@ public class ServiceJFrame extends javax.swing.JFrame {
                 dispose();
             } catch (NumberFormatException | HeadlessException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
+            } catch (ParseException ex) {
+                Logger.getLogger(ServiceJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
