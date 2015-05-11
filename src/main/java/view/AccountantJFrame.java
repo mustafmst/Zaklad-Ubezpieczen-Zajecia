@@ -126,7 +126,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         }
         
         for(Service c : wynik ){
-            model.addRow(new Object[]{c.getUserFk(),c.getPeselFk(),c.getDescription(),c.getInsuranceCost(),c.getServiceCost(),c.getInsuranceCost()+c.getServiceCost(),c.getDataOfAddService()});
+            model.addRow(new Object[]{c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko() ,c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName(),c.getDescription(),c.getInsuranceCost(),c.getServiceCost(),c.getInsuranceCost()+c.getServiceCost(),c.getDateOfService()});
         }
     }
     

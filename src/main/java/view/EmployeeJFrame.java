@@ -11,6 +11,8 @@ package view;
  */
 import entities.User;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.UserModel;
 import model.UserStatus;

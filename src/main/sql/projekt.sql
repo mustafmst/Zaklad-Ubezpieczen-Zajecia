@@ -44,10 +44,11 @@ create table Service (
 	serviceId int not null primary key auto_increment,
 	pesel_fk varchar(20) not null,	
     user_fk int not null,
-    serviceCost int not null,
-    insuranceCost int not null,
+    serviceCost float not null,
+    insuranceCost float not null,
     description varchar(255) not null,
-    dataOfAddService date not null,
+    dateOfService date not null,
+    dateOfAddService date not null,
     FOREIGN KEY(pesel_fk) REFERENCES Customer(pesel),
     FOREIGN KEY(user_fk) REFERENCES User(userId)
 );
@@ -69,6 +70,6 @@ INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('3
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('123456789',5,'2015-04-10', '08:00:00');
 
 select * from Appointment;
-#insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dataOfAddService) Values
-#(1,2, 100, 200, 'Opis bla bla',CURDATE());
+insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dateOfService, dateOfAddService) Values
+(123456789,2, 100, 200, 'Opis bla bla',CURDATE(),CURDATE());
 
