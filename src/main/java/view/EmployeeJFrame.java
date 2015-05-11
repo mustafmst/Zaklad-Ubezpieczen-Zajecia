@@ -49,7 +49,7 @@ private final UserModel userModel = new UserModel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Employee");
-        setIconImages(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
         jLabelLogin.setText("Login");
 

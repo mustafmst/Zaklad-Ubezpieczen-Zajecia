@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javafx.scene.chart.PieChart;
 
@@ -22,7 +23,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import model.AppointmentModel;
 import model.UserIdentify;
+import model.UserModel;
 import model.UserStatus;
 import view.AdvisorJFrame;
 import view.AppointmentsJFrame;
@@ -38,6 +41,7 @@ public class Cal extends JPanel {
 
   private boolean firstOpenAppointment = true;
   private boolean firstOpenAdvisor = true;
+  
   /** The buttons to be displayed */
   protected JButton labs[][];
 
@@ -61,12 +65,21 @@ public class Cal extends JPanel {
 
   /** The year choice */
   private JComboBox yearChoice;
-
+  
+  /** Ilosc doradców w firmie */
+  private int advisorCount;
+  
+  
+  private final UserModel user = new UserModel();
+  private final AppointmentModel appointment = new AppointmentModel();
+  
   /**
    * Construct a Cal, starting with today.
    */
   public Cal() {
     super();
+    advisorCount = user.findId_advisors().size();
+    
     setYYMMDD(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
         calendar.get(Calendar.DAY_OF_MONTH));
     buildGUI();
@@ -83,6 +96,7 @@ public class Cal extends JPanel {
    */
   public Cal(int year, int month, int today) {
     super();
+    
     setYYMMDD(year, month, today);
     buildGUI();
     recompute();
@@ -163,6 +177,7 @@ public class Cal extends JPanel {
           // When this becomes a Bean, you can
           // fire some kind of DateChanged event here.
           // Also, build a similar daySetter for day-of-week btns.
+          System.out.println("Wciśnięto"+num);
         }
       }
     };
@@ -204,17 +219,33 @@ public class Cal extends JPanel {
     // Blank out the labels before 1st day of month
     for (int i = 0; i < leadGap; i++) {
       labs[0][i].setText("");
+      labs[0][i].setBackground(b0.getBackground());
+      labs[0][i].repaint();
     }
 
     // Fill in numbers for the day of month.
     for (int i = 1; i <= daysInMonth; i++) {
       JButton b = labs[(leadGap + i - 1) / 7][(leadGap + i - 1) % 7];
       b.setText(Integer.toString(i));
+      b.setBackground(b0.getBackground());
+      b.repaint();                                                                          //Tu wprowadzam zmiane koloru z terminami
+      if(UserIdentify.status == UserStatus.SECRETARY){
+        if(this.appointmentsFull(yy, mm, i)){
+            b.setBackground(Color.red);
+            b.repaint();
+        }  
+        else{
+            b.setBackground(Color.green);
+            b.repaint();
+        }
+      }
     }
 
     // 7 days/week * up to 6 rows
     for (int i = leadGap + 1 + daysInMonth; i < 6 * 7; i++) {
       labs[(i) / 7][(i) % 7].setText("");
+      labs[(i) / 7][(i) % 7].setBackground(b0.getBackground());
+      labs[(i) / 7][(i) % 7].repaint();
     }
 
     // Shade current day, only if current month
@@ -256,6 +287,16 @@ public class Cal extends JPanel {
       b = labs[(leadGap + activeDay - 1) / 7][(leadGap + activeDay - 1) % 7];
       b.setBackground(b0.getBackground());
       b.repaint();
+      if(UserIdentify.status == UserStatus.SECRETARY){
+        if(this.appointmentsFull(yy, mm, activeDay)){
+            b.setBackground(Color.red);
+            b.repaint();
+        }  
+        else{
+            b.setBackground(Color.green);
+            b.repaint();
+        }
+      }
       activeDay = -1;
     }
   }
@@ -274,8 +315,8 @@ public class Cal extends JPanel {
       dd = newDay;
     // Now shade the correct square
     Component square = labs[(leadGap + newDay - 1) / 7][(leadGap + newDay - 1) % 7];
-    square.setBackground(Color.red);
-    square.repaint();
+    //square.setBackground(Color.red);
+    //square.repaint();
     activeDay = newDay;
     System.out.println("UUUUUUUUU" + activeDay);
     if(firstOpenAppointment == false && UserIdentify.status == UserStatus.SECRETARY) {
@@ -286,6 +327,14 @@ public class Cal extends JPanel {
         //AdvisorJFrame advisorJFrame = new AdvisorJFrame();
         //advisorJFrame.setVisible(true);
     }
+  }
+  
+  private boolean appointmentsFull(int y,int m, int d){
+      
+      Date date = new Date(y,(m+1),d);
+      
+      if( this.appointment.findAppointment(date).size()>=7*advisorCount) return true;
+      else return false;
   }
 
   /** For testing, a main program */
