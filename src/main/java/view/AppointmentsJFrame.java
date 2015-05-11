@@ -22,6 +22,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
     private int day;
     private int month;
     private int year;
+    private boolean firstOpen;
     
     Date date;
     
@@ -34,6 +35,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
      */
     public AppointmentsJFrame() {
         super();
+        firstOpen = true;
     }
     
     public AppointmentsJFrame(int dd, int mm, int yy) {
@@ -45,7 +47,9 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
         System.out.println("Data: " + dd + mm + yy);
         
         date = new Date(yy,(mm+1),dd);
+        firstOpen = true;
         createTable();
+        
         
     }
 
@@ -63,8 +67,11 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
         Vector<Integer> advisors = new Vector<Integer>();
         for(User A : this.user.findId_advisors()){
             advisors.addElement(A.getUserId());
-            model.addColumn(A.getImie()+" "+A.getNazwisko());
+            if(firstOpen){
+                model.addColumn(A.getImie()+" "+A.getNazwisko());
+            }
         }
+        firstOpen = false;
         List<Appointment> app = new ArrayList<Appointment>();
         for(Appointment A : this.appointment.findAppointment(date)){
             app.add(A);
