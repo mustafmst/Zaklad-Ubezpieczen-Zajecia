@@ -14,10 +14,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.CustomerModel;
 import model.ServiceModel;
 import model.UserIdentify;
 
@@ -31,6 +34,8 @@ public class ServiceJFrame extends javax.swing.JFrame {
     private int day;
     private int month;
     private int year;
+    
+    private final CustomerModel customerModel = new CustomerModel();
     /**
      * Creates new form ServiceJFrame
      *
@@ -38,17 +43,18 @@ public class ServiceJFrame extends javax.swing.JFrame {
      */
     public ServiceJFrame() {
         super();
+        setComboBox();
     }
     
     
     public ServiceJFrame(int dd, int mm, int yy) {
-        super("Add Service");
-        initComponents();
-        
+        super("Add Service");   
+        initComponents();      
         this.day = dd;
         this.month = mm + 1; //add 1 month because we have indexes from 0
         this.year = yy;
         setVisible(true);
+        setComboBox();
     }
 
     /**
@@ -64,13 +70,13 @@ public class ServiceJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldCustomer = new javax.swing.JTextField();
         jTextFieldInsuranceCost = new javax.swing.JTextField();
         jTextFieldServiceCost = new javax.swing.JTextField();
         jButtonAdd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDescription = new javax.swing.JTextArea();
         jButtonBack = new javax.swing.JButton();
+        jComboBoxPesel = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
@@ -82,12 +88,6 @@ public class ServiceJFrame extends javax.swing.JFrame {
         jLabel3.setText("Insurance Cost $");
 
         jLabel4.setText("Service Description");
-
-        jTextFieldCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCustomerActionPerformed(evt);
-            }
-        });
 
         jTextFieldInsuranceCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +120,13 @@ public class ServiceJFrame extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxPesel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { }));
+        jComboBoxPesel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPeselActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,23 +142,25 @@ public class ServiceJFrame extends javax.swing.JFrame {
                     .addComponent(jButtonBack))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldInsuranceCost, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldServiceCost, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldInsuranceCost, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jComboBoxPesel, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldServiceCost, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)))
+                        .addGap(0, 128, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jTextFieldCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                    .addComponent(jComboBoxPesel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldServiceCost, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -162,20 +171,16 @@ public class ServiceJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCustomerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCustomerActionPerformed
 
     private void jTextFieldInsuranceCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldInsuranceCostActionPerformed
         // TODO add your handling code here:
@@ -184,7 +189,18 @@ public class ServiceJFrame extends javax.swing.JFrame {
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
 
         Service service = new Service();
-        String pesel = this.jTextFieldCustomer.getText();
+        
+//       DefaultComboBoxModel model = (DefaultComboBoxModel) this.jComboBoxPesel.getModel();
+//        
+//       List<Customer> listOfCustomer = customerModel.findAll();
+//       for(Customer customer : listOfCustomer) {
+//           model.addElement(customer.getPesel());
+//           System.out.println("Pesel " + customer.getPesel());
+//       }
+       String pesel = jComboBoxPesel.getSelectedItem().toString();
+        //String pesel = this.jTextFieldCustomer.getText();
+        
+        
         Float serviceCost = Float.parseFloat(this.jTextFieldServiceCost.getText());
         Float insuranceCost = Float.parseFloat(this.jTextFieldInsuranceCost.getText());
         String description = this.jTextAreaDescription.getText();
@@ -230,9 +246,25 @@ public class ServiceJFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
 
+    private void jComboBoxPeselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPeselActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPeselActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    
+    private void setComboBox() {
+       DefaultComboBoxModel model = (DefaultComboBoxModel) this.jComboBoxPesel.getModel();
+        
+       List<Customer> listOfCustomer = customerModel.findAll();
+       for(Customer customer : listOfCustomer) {
+           model.addElement(customer.getPesel());
+           System.out.println("Pesel " + customer.getPesel());
+       }
+    
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -268,13 +300,13 @@ public class ServiceJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonBack;
+    private javax.swing.JComboBox jComboBoxPesel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaDescription;
-    private javax.swing.JTextField jTextFieldCustomer;
     private javax.swing.JTextField jTextFieldInsuranceCost;
     private javax.swing.JTextField jTextFieldServiceCost;
     // End of variables declaration//GEN-END:variables

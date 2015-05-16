@@ -52,7 +52,7 @@ create table Service (
     FOREIGN KEY(pesel_fk) REFERENCES Customer(pesel),
     FOREIGN KEY(user_fk) REFERENCES User(userId)
 );
-select * from Service;
+#select * from Service;
 
 create table Appointment(
 	appointmentId int primary key not null auto_increment,
@@ -63,13 +63,62 @@ create table Appointment(
     FOREIGN KEY (id_advisor) REFERENCES User(userId)
 );
 
+
+#select * from Appointment;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS addAppointment$$
+
+create procedure addAppointment(in zm int,in pesel varchar(20))
+begin
+	declare i int default 1;
+    
+    while( i < zm ) do
+			INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours)
+            VALUES (pesel,5,CURDATE()+i, '09:00:00'),
+				   (pesel,5,CURDATE()+i, '10:00:00'),
+				   (pesel,5,CURDATE()+i, '11:00:00'),
+				   (pesel,5,CURDATE()+i, '12:00:00'),
+                   (pesel,5,CURDATE()+i, '13:00:00'),
+                   (pesel,5,CURDATE()+i, '14:00:00');
+		set i = i + 1;
+	end while;
+end$$
+
+call addAppointment(10,'987654321');
+
+call addAppointment(5,'543267890');
+
+call addAppointment(10,'333333333');
+
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('987654321',2,'2015-04-10', '09:00:00');
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('123456799',5,'2015-04-10', '09:00:00');
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('543267890',2,'2015-04-10', '10:00:00');
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('333333333',5,'2015-04-10', '14:00:00');
 INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('123456789',5,'2015-04-10', '08:00:00');
 
-select * from Appointment;
-insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dateOfService, dateOfAddService) Values
-(123456789,2, 100, 200, 'Opis bla bla',CURDATE(),CURDATE());
+#insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dateOfService, dateOfAddService) Values
+#(123456789,2, 100, 200, 'Opis bla bla',CURDATE(),CURDATE());
+#DELIMITER $$
+
+DROP PROCEDURE IF EXISTS addService$$
+
+create procedure addService(in zm int,in pesel varchar(20),in user int)
+begin
+	declare i int default 1;
+    
+    while( i < zm ) do
+			insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dateOfService, dateOfAddService)
+            Values (pesel,user, 100, 200, 'Opis bla bla',CURDATE()+i,CURDATE());
+            
+		set i = i + 1;
+	end while;
+end$$
+
+call addService(10,'123456789',2);
+
+call addService(6,'987654321',3);
+
+call addService(5,'333333333',1);
 
