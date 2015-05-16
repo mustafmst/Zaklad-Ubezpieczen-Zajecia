@@ -157,16 +157,42 @@ public class CustomerJFrame extends javax.swing.JFrame {
             String phone = this.jTextFieldPhone.getText();
             String showInputDialog = null;
             boolean isFill = true;
-                  if((EmailValidation(email))==false)
+            if((EmailValidation(email))==false)
             {
                 JOptionPane.showMessageDialog(null, "Invalid email. Please enter correct email.");
                 return;
-            }   else
-                     if((PeselValidation(pesel))==false)
-                     {
-                        JOptionPane.showMessageDialog(null, "Invalid pesel. Please enter correct pesel."); 
-                        return;
-                     }
+            }else
+                
+            if((PeselValidation(pesel))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid pesel. Please enter correct pesel."); 
+                return;
+            }else
+                
+            if((FirstNameValidation(firstName))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid First Name. Please enter correct First Name."); 
+                return;
+            }else 
+                
+            if((LastNameValidation(lastName))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Last Name. Please enter correct Last Name."); 
+                return;
+            }else
+                
+            if((PhoneValidation(phone))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid phone number. Please enter correct phone number."); 
+                return;
+            }else
+            
+            if((AdressValidation(adress))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Adress. Please enter correct adress."); 
+                return;
+            }else
+                
             if (email.isEmpty()) {
                 showInputDialog = "email";
                 isFill = false;
@@ -266,7 +292,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
     
     public boolean EmailValidation(String customerEmail)
     {
-       String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+       String regex = ".+@.+\\.[a-z]+";
  
        Pattern pattern = Pattern.compile(regex);
        Matcher matcher = pattern.matcher(customerEmail);
@@ -284,11 +310,54 @@ public class CustomerJFrame extends javax.swing.JFrame {
            int cyfraKontrolna = Integer.parseInt(customerPesel.substring(10, 11));
            
            suma %= 10;
-           suma = 10 - suma;
-           suma %= 10;
-           
+           if(suma==0)
+           {
+               return (suma==cyfraKontrolna);
+           }else
+           suma = 10 - suma;       
            return (suma == cyfraKontrolna);
     }
+       
+       public boolean FirstNameValidation(String customerFirstName)
+    {
+       String regex = "[a-zA-Z]{3,12}";
+ 
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(customerFirstName);
+       
+       return matcher.matches();
+    }
+       
+       public boolean LastNameValidation(String customerLastName)
+    {
+       String regex = "[a-zA-Z]{3,12}-?[a-zA-Z]*";
+ 
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(customerLastName);
+       
+       return matcher.matches();
+    }
+       
+       public boolean PhoneValidation(String customerPhone)
+    {
+       String regex = "\\+?[0-9]{6,12}";
+ 
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(customerPhone);
+       
+       return matcher.matches();
+    }
+       
+       public boolean AdressValidation(String customerAdress)
+    {
+       String regex = "[a-zA-Z]{2,15}.+ [0-9]{2}-([0-9]){3}( [a-zA-Z]{2,15})";
+ 
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(customerAdress);
+       
+       return matcher.matches();
+    }
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddNewCustomer;
     private javax.swing.JButton jButtonBack;
