@@ -1,11 +1,18 @@
 
 use  projekt;
 
-drop table Appointment;
-drop table Service;
-drop table Customer;
-drop table User;
-
+drop table IF EXISTS Appointment;
+drop table IF EXISTS Service;
+drop table IF EXISTS Customer;
+drop table IF EXISTS User;
+drop table IF EXISTS TempLogin;
+drop table IF EXISTS History;
+#select * from User;
+#select * from Customer;
+#select * from Service;
+#select * from Appointment;
+#select * from History;
+#select * from TempLogin;
 create table User(
 	userId int primary key not null auto_increment,
     login varchar(30)  not null UNIQUE ,
@@ -16,12 +23,8 @@ create table User(
     nazwisko varchar(30) not null
 );
 
-INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('root',MD5('root'),'Director',1, 'Piotr','Nowak' );
-INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('Damian',MD5('Damian'),'Advisor',4 ,'Damian','Mamla');
-INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('Basia',MD5('Basia'),'Secretary',2, 'Basia','Foczka1' );
-INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('Kasia',MD5('Kasia'),'Accountant',3,'Kasia','Foczka2' );
-INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('Pawel',MD5('Pawel'),'Advisor',4 ,'Pawel','Kruk');
-INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('a',MD5('a'),'Secretary',2, 'a','a' );
+#insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dateOfService, dateOfAddService) Values
+#(123456789,2, 100, 200, 'Opis bla bla',CURDATE(),CURDATE());
 
 #select * from User;
 create table Customer(
@@ -32,11 +35,7 @@ create table Customer(
     adress varchar(50),
     email varchar(30)
 );
-INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('123456789','Kamil','Bartu',276456321, '33-123 Kolo','kamil@bartu.com' );
-INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('987654321','Beata','Koza',876543232, '33-123 Kolo','kamil@bartu.com' );
-INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('123456799','Pawel','Gosc',124124124, '33-123 Kolo','kamil@bartu.com' );
-INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('543267890','Michal','Git',154654734, '33-123 Kolo','kamil@bartu.com' );
-INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('333333333','Monika','Siema',457453453, '33-123 Kolo','kamil@bartu.com' );
+
 
 #select * from Customer;
 
@@ -52,7 +51,7 @@ create table Service (
     FOREIGN KEY(pesel_fk) REFERENCES Customer(pesel),
     FOREIGN KEY(user_fk) REFERENCES User(userId)
 );
-#select * from Service;
+
 
 create table Appointment(
 	appointmentId int primary key not null auto_increment,
@@ -63,8 +62,66 @@ create table Appointment(
     FOREIGN KEY (id_advisor) REFERENCES User(userId)
 );
 
+create table History(
+	hisId int primary key not null auto_increment,
+    userId int not null,
+    dateOfChange datetime not null,
+    whatChange varchar(30) not null
+);
 
-#select * from Appointment;
+create table TempLogin(
+	id int primary key not null auto_increment,
+	userId int
+	);
+
+#select * from TempLogin;
+
+
+
+
+
+
+
+/************************************************** INSERTY ******************************************************/
+insert into TempLogin(userId) values (1);
+
+INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('root',MD5('root'),'Director',1, 'Piotr','Nowak' );
+INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('Damian',MD5('Damian'),'Advisor',4 ,'Damian','Mamla');
+INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('Basia',MD5('Basia'),'Secretary',2, 'Basia','Foczka1' );
+INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('Kasia',MD5('Kasia'),'Accountant',3,'Kasia','Foczka2' );
+INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('Pawel',MD5('Pawel'),'Advisor',4 ,'Pawel','Kruk');
+INSERT INTO User (login,password,stanowisko,status,imie,nazwisko) VALUES ('a',MD5('a'),'Secretary',2, 'a','a' );
+
+INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('123456789','Kamil','Bartu',276456321, '33-123 Kolo','kamil@bartu.com' );
+INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('987654321','Beata','Koza',876543232, '33-123 Kolo','kamil@bartu.com' );
+INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('123456799','Pawel','Gosc',124124124, '33-123 Kolo','kamil@bartu.com' );
+INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('543267890','Michal','Git',154654734, '33-123 Kolo','kamil@bartu.com' );
+INSERT INTO Customer (pesel,firstName,lastName,phone,adress,email) VALUES ('333333333','Monika','Siema',457453453, '33-123 Kolo','kamil@bartu.com' );
+
+
+
+INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('987654321',2,'2015-04-10', '09:00:00');
+INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('123456799',5,'2015-04-10', '09:00:00');
+INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('543267890',2,'2015-04-10', '10:00:00');
+INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('333333333',5,'2015-04-10', '14:00:00');
+INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('123456789',5,'2015-04-10', '08:00:00');
+
+
+
+
+/******************Procedury **********************************/
+
+delimiter $$
+DROP PROCEDURE IF EXISTS ProcedureTempLogin$$
+CREATE PROCEDURE ProcedureTempLogin()
+	BEGIN
+	Truncate table TempLogin;
+END$$
+
+#call ProcedureTempLogin();
+
+#INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('12345679',5,'2015-04-10', '08:00:00');
+
 
 DELIMITER $$
 
@@ -86,21 +143,7 @@ begin
 	end while;
 end$$
 
-call addAppointment(10,'987654321');
 
-call addAppointment(5,'543267890');
-
-call addAppointment(10,'333333333');
-
-INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('987654321',2,'2015-04-10', '09:00:00');
-INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('123456799',5,'2015-04-10', '09:00:00');
-INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('543267890',2,'2015-04-10', '10:00:00');
-INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('333333333',5,'2015-04-10', '14:00:00');
-INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours) VALUES ('123456789',5,'2015-04-10', '08:00:00');
-
-#insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dateOfService, dateOfAddService) Values
-#(123456789,2, 100, 200, 'Opis bla bla',CURDATE(),CURDATE());
-#DELIMITER $$
 
 DROP PROCEDURE IF EXISTS addService$$
 
@@ -116,9 +159,92 @@ begin
 	end while;
 end$$
 
+
+
+/************************Triggery*******************************************/
+
+drop trigger IF EXISTS userTrigger;
+
+DELIMITER $$
+CREATE TRIGGER userTrigger
+AFTER INSERT ON User FOR EACH ROW
+begin
+		DECLARE vUser int;
+        SELECT userId INTO vUser FROM TempLogin;   
+        
+        insert into History(userId, dateOfChange, whatChange)
+        values (vUser, sysdate(),'Add employee');
+END;
+$$
+DELIMITER ;
+
+drop trigger IF EXISTS customerTrigger;
+
+DELIMITER $$
+CREATE TRIGGER customerTrigger
+AFTER INSERT ON Customer FOR EACH ROW
+begin
+		DECLARE vUser int;
+        SELECT userId INTO vUser FROM TempLogin;   
+        
+        insert into History(userId, dateOfChange, whatChange)
+        values (vUser, sysdate(),'Add customer');
+END;
+$$
+DELIMITER ;
+
+
+
+
+drop trigger  IF EXISTS servicetTrigger;
+
+DELIMITER $$
+CREATE TRIGGER servicetTrigger
+AFTER INSERT ON Service FOR EACH ROW
+begin
+		DECLARE vUser int;
+        SELECT userId INTO vUser FROM TempLogin;
+        
+        insert into History(userId, dateOfChange, whatChange)
+        values (vUser,sysdate(),'Add service');
+END;
+$$
+DELIMITER ;
+
+#insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dateOfService, dateOfAddService) Values
+#(123456789,2, 100, 200, 'Opis bla bla',CURDATE(),CURDATE());
+
+
+
+drop trigger  IF EXISTS appointmentTrigger;
+
+DELIMITER $$
+CREATE TRIGGER appointmentTrigger
+AFTER INSERT ON Appointment FOR EACH ROW
+begin
+		DECLARE vUser int;
+        SELECT userId INTO vUser FROM TempLogin;
+
+        insert into History(userId, dateOfChange, whatChange)
+        values (vUser,sysdate(),'Add appointment');
+END;
+$$
+DELIMITER ;
+
+
+/*********************wywołania procedur***************************/
+
+call addAppointment(10,'987654321');
+
+call addAppointment(5,'543267890');
+
+call addAppointment(10,'333333333');
+
 call addService(10,'123456789',2);
 
 call addService(6,'987654321',3);
 
 call addService(5,'333333333',1);
+
+call ProcedureTempLogin();
 

@@ -16,7 +16,10 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import model.HibernateUtil;
 import model.ServiceModel;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 import pdf.GeneratePDF;
 
@@ -122,7 +125,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
                 wynik.add(c);
             }
         }catch(Exception e){
-            
+            e.printStackTrace();
         }
         
         for(Service c : wynik ){
@@ -166,6 +169,12 @@ public class AccountantJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_GeneratePDFjButtonActionPerformed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "{call ProcedureTempLogin()}";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.executeUpdate();
+        session.getTransaction().commit();
         LoginJFrame loginFrame = new LoginJFrame();
         loginFrame.setVisible(true);
         dispose();

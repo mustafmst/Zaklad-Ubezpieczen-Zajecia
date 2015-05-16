@@ -6,4 +6,6 @@
     <table-filter match-name="customer"/>
     <table-filter match-name="service"/>
     <table-filter match-name="appointment"/>
+    <table-filter match-name="templogin"/>
+    <table-filter match-name="history"/>
 </hibernate-reverse-engineering>

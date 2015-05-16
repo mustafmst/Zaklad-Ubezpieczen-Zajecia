@@ -11,6 +11,8 @@ import entities.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.*;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -214,6 +216,12 @@ public class SecretaryJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldSearchKeyPressed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "{call ProcedureTempLogin()}";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.executeUpdate();
+        session.getTransaction().commit();
         LoginJFrame loginFrame = new LoginJFrame();
         loginFrame.setVisible(true);
         dispose();

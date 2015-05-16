@@ -12,5 +12,7 @@
     <mapping class="entities.Customer"/>
     <mapping class="entities.Service"/>
     <mapping class="entities.Appointment"/>
+    <mapping class="entities.Templogin"/>
+    <mapping class="entities.History"/>
   </session-factory>
 </hibernate-configuration>

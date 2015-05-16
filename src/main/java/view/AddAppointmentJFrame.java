@@ -78,6 +78,12 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Pesel");
 
+        jTextFieldPesel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPeselActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Hour");
 
         jComboBoxHours.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"8:00:00","9:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00" }));
@@ -218,6 +224,10 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_jButtonAddNewAppointmentActionPerformed
+
+    private void jTextFieldPeselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPeselActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPeselActionPerformed
 
     /**
      * @param args the command line arguments

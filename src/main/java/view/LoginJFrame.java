@@ -10,6 +10,8 @@ import model.*;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 import model.UserModel;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 /**
  *
  * @author Damian Mamla
@@ -19,12 +21,16 @@ import model.UserModel;
 public class LoginJFrame extends javax.swing.JFrame {
 
     private final UserModel userModel = new UserModel();
-    
+    private final LoginModel loginModel = new LoginModel();
     /**
      * Creates new form LoginJFrame
      */
     public LoginJFrame() {
+         
         initComponents();
+        
+       
+        
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jTextFieldLogin.requestFocus();
@@ -43,6 +49,10 @@ public class LoginJFrame extends javax.swing.JFrame {
             for (User u : this.userModel.findAll()) {
                 System.out.println(this.userModel.genrateMD5(u.getPassword()));
                 if (u.getLogin().equals(user.getLogin()) && this.userModel.genrateMD5(user.getPassword()).equals(u.getPassword())) {
+      
+                    Templogin templogin = new Templogin();
+                    templogin.setUserId(u.getUserId());
+                    this.loginModel.create(templogin);                 
                     isLogged = true;
                     System.out.println(user.getLogin() + " " + user.getPassword() + "!!!");
                     JOptionPane.showMessageDialog(null, "You have logged in successfully.", "Success",
@@ -249,6 +259,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                
                 new LoginJFrame().setVisible(true);
             }
         });

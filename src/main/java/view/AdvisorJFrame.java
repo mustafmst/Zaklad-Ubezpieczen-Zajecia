@@ -8,7 +8,10 @@ package view;
 import Calendar.Cal;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import model.HibernateUtil;
 import model.UserIdentify;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -88,6 +91,12 @@ public class AdvisorJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "{call ProcedureTempLogin()}";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.executeUpdate();
+        session.getTransaction().commit();
         LoginJFrame loginFrame = new LoginJFrame();
         loginFrame.setVisible(true);
         dispose();

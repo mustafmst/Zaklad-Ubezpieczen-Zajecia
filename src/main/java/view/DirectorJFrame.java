@@ -11,6 +11,9 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import model.CustomerModel;
+import model.HibernateUtil;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -48,6 +51,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCustomers = new javax.swing.JTable();
         jButtonLogout = new javax.swing.JButton();
+        jButtonChanges = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
@@ -115,6 +119,13 @@ public class DirectorJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonChanges.setText("Search Changes");
+        jButtonChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChangesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,7 +147,9 @@ public class DirectorJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(104, 104, 104)
                         .addComponent(jButtonAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
+                        .addGap(51, 51, 51)
+                        .addComponent(jButtonChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
                         .addComponent(jButtonLogout)))
                 .addContainerGap())
         );
@@ -157,7 +170,8 @@ public class DirectorJFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jButtonAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(23, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -190,10 +204,24 @@ public class DirectorJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldSearchKeyPressed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+   
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "{call ProcedureTempLogin()}";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.executeUpdate();
+        session.getTransaction().commit();
+       
         LoginJFrame loginFrame = new LoginJFrame();
         loginFrame.setVisible(true);
+   
         dispose();
     }//GEN-LAST:event_jButtonLogoutActionPerformed
+
+    private void jButtonChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangesActionPerformed
+        HistoryJFrame historyJFrame = new HistoryJFrame();
+        historyJFrame.setVisible(true);    
+    }//GEN-LAST:event_jButtonChangesActionPerformed
     
     private void clientSearch(){
         String[] search = this.jTextFieldSearch.getText().split(" ");
@@ -220,7 +248,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
                 if(tmp == search.length) wynik.add(c);
             }
         }catch(Exception e){
-            
+            e.printStackTrace();
         }
         
         for(Customer c : wynik ){
@@ -265,6 +293,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAddEmployee;
+    private javax.swing.JButton jButtonChanges;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JLabel jLabel3;
