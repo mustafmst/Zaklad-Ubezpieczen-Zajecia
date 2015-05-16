@@ -15,7 +15,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
+import entities.Service;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import model.ServiceModel;
 
 /**
  *
@@ -30,7 +34,7 @@ public class GeneratePDF {
     	new GeneratePDF().createPdf(RESULT);
     }
     */
-    
+        
     public void createPdf(String filename)
 	throws DocumentException, IOException {
             Document document = new Document();
@@ -48,7 +52,9 @@ public class GeneratePDF {
             document.close();
     }
     
-    public static PdfPTable createTable() {
+    private final ServiceModel serviceModel = new ServiceModel();
+    
+    public PdfPTable createTable() {
 
         PdfPTable table = new PdfPTable(7);
 
@@ -60,15 +66,25 @@ public class GeneratePDF {
         table.addCell(new Paragraph("Cost", new Font(FontFamily.HELVETICA, 11)));
         table.addCell(new Paragraph("Date", new Font(FontFamily.HELVETICA, 11)));
         
-        for (int i=0 ; i<20 ; i++)
+        List<Service> transactions = new ArrayList<Service>();
+        try{
+            for( Service c : this.serviceModel.findAll() )
+            {
+                transactions.add(c);
+            }
+        }
+        catch(Exception e){
+        }
+        
+        for (Service c : transactions)
         {
-            table.addCell(new Paragraph(" ", new Font(FontFamily.HELVETICA, 10)));
-            table.addCell(new Paragraph(" ", new Font(FontFamily.HELVETICA, 10)));
-            table.addCell(new Paragraph(" ", new Font(FontFamily.HELVETICA, 10)));
-            table.addCell(new Paragraph(" ", new Font(FontFamily.HELVETICA, 10)));
-            table.addCell(new Paragraph(" ", new Font(FontFamily.HELVETICA, 10)));
-            table.addCell(new Paragraph(" ", new Font(FontFamily.HELVETICA, 10)));
-            table.addCell(new Paragraph(" ", new Font(FontFamily.HELVETICA, 10)));
+            table.addCell(new Paragraph( c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko() , new Font(FontFamily.HELVETICA, 10)));
+            table.addCell(new Paragraph( c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName() , new Font(FontFamily.HELVETICA, 10)));
+            table.addCell(new Paragraph( c.getDescription() , new Font(FontFamily.HELVETICA, 10)));
+            table.addCell(new Paragraph( String.format("%.2f",c.getInsuranceCost() ) , new Font(FontFamily.HELVETICA, 10)));
+            table.addCell(new Paragraph( String.format("%.2f",c.getServiceCost() ) , new Font(FontFamily.HELVETICA, 10)));
+            table.addCell(new Paragraph( String.format("%.2f",c.getInsuranceCost()+c.getServiceCost() ) , new Font(FontFamily.HELVETICA, 10)));
+            table.addCell(new Paragraph( String.format("%td.%tm.%tY",c.getDateOfService(),c.getDateOfService(),c.getDateOfService() ), new Font(FontFamily.HELVETICA, 10)));
         }
         
         return table;
