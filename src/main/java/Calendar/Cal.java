@@ -230,7 +230,7 @@ public class Cal extends JPanel {
       b.setText(Integer.toString(i));
       b.setBackground(b0.getBackground());
       b.repaint();                                                                          //Tu wprowadzam zmiane koloru z terminami
-      if(UserIdentify.status == UserStatus.SECRETARY){
+      if(UserIdentify.status == UserStatus.SECRETARY | UserIdentify.status == UserStatus.DIRECTOR){
         if(this.appointmentsFull(yy, mm, i)){
             b.setBackground(Color.red);
             b.repaint();
@@ -288,7 +288,7 @@ public class Cal extends JPanel {
       b = labs[(leadGap + activeDay - 1) / 7][(leadGap + activeDay - 1) % 7];
       b.setBackground(b0.getBackground());
       b.repaint();
-      if(UserIdentify.status == UserStatus.SECRETARY){
+      if(UserIdentify.status == UserStatus.SECRETARY | UserIdentify.status == UserStatus.DIRECTOR){
         if(this.appointmentsFull(yy, mm, activeDay)){
             b.setBackground(Color.red);
             b.repaint();
@@ -320,7 +320,7 @@ public class Cal extends JPanel {
     //square.repaint();
     activeDay = newDay;
     System.out.println("UUUUUUUUU" + activeDay + " " + mm + " " + yy);
-    if(firstOpenAppointment == false && UserIdentify.status == UserStatus.SECRETARY) {
+    if(firstOpenAppointment == false && ( UserIdentify.status == UserStatus.SECRETARY | UserIdentify.status == UserStatus.DIRECTOR )) {
         System.out.println("Tu");
         AppointmentsJFrame appointmentsJFrame = new AppointmentsJFrame(activeDay, mm, yy);
         appointmentsJFrame.setVisible(true);
