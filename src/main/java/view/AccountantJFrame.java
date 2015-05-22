@@ -67,6 +67,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         GeneratePDFjButton = new javax.swing.JButton();
         jButtonLogout = new javax.swing.JButton();
         jButtonBack = new javax.swing.JButton();
+		
 		if(UserIdentify.status != UserStatus.ACCOUNTANT){
 			jButtonLogout.setVisible(false);
 		} 
@@ -74,8 +75,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
 		{
 			jButtonBack.setVisible(false);
 		}
-		
-		
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
@@ -90,6 +90,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         jTableAccountant.setRowHeight(32);
         jScrollPane1.setViewportView(jTableAccountant);
 
+        GeneratePDFjButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/x-office-document1.png"))); // NOI18N
         GeneratePDFjButton.setText("Generate PDF");
         GeneratePDFjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +98,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/system-log-out1.png"))); // NOI18N
         jButtonLogout.setText("Logout");
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +106,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/go-previous1.png"))); // NOI18N
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,27 +122,25 @@ public class AccountantJFrame extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
-                        .addGap(23, 23, 23))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(GeneratePDFjButton)
-                        .addGap(405, 405, 405)
-                        .addComponent(jButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                        .addGap(441, 441, 441)
+                        .addComponent(jButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonLogout)
-                        .addGap(59, 59, 59))))
+                        .addComponent(jButtonLogout))
+                    .addComponent(jScrollPane1))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GeneratePDFjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonLogout)
                     .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                .addGap(33, 33, 33))
         );
 
         pack();

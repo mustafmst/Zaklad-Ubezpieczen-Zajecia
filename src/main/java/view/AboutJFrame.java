@@ -71,7 +71,7 @@ public class AboutJFrame extends javax.swing.JFrame {
         jLabelName.setText("Insurance system");
 
         jLabelVersion.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        jLabelVersion.setText("Version: 0.7.5 (2015)");
+        jLabelVersion.setText("Version: 0.9.5 (2015)");
 
         jLabelAuthors.setText("Authors:");
 

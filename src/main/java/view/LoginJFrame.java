@@ -127,6 +127,7 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Login");
 
+        jButtonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/system-lock-screen1.png"))); // NOI18N
         jButtonLogin.setText("Login");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,12 +140,12 @@ public class LoginJFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 145, Short.MAX_VALUE)
-                        .addComponent(jButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(162, Short.MAX_VALUE)
+                        .addComponent(jButtonLogin))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
@@ -174,6 +175,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText("Insurance System");
 
+        jButtonAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/help-browser1.png"))); // NOI18N
         jButtonAbout.setText("About");
         jButtonAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,11 +188,11 @@ public class LoginJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(186, Short.MAX_VALUE)
+                .addContainerGap(173, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(jButtonAbout)
                 .addGap(19, 19, 19))
         );

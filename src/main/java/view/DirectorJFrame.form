@@ -28,34 +28,32 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" min="-2" pref="785" max="-2" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="785" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jTextFieldSearch" min="-2" pref="256" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButtonSearch" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="62" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonAddEmployee" min="-2" pref="69" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonTransactions" min="-2" pref="101" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jButtonAddEmployee" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="jButtonTransactions" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonChanges" min="-2" pref="149" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Calender" min="-2" pref="138" max="-2" attributes="0"/>
-                      <EmptySpace pref="87" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonLogout" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,37 +71,26 @@
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="229" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonAddEmployee" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="jButtonChanges" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="Calender" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="jButtonTransactions" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButtonLogout" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonAddEmployee" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jButtonChanges" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="Calender" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jButtonTransactions" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jButtonLogout" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add new employee"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jButtonAddEmployee">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/list-add1.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Add new employee"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddEmployeeActionPerformed"/>
@@ -116,6 +103,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSearch">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/system-search1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
       <Events>
@@ -124,7 +114,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/list-add1.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Add customer"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -163,6 +156,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButtonLogout">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/system-log-out1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
       <Events>
@@ -171,6 +167,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonChanges">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/edit-find1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Search Changes"/>
       </Properties>
       <Events>
@@ -179,6 +178,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="Calender">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/x-office-calendar1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Calender"/>
       </Properties>
       <Events>
@@ -187,6 +189,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonTransactions">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/image-loading2.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Transactions"/>
       </Properties>
       <Events>

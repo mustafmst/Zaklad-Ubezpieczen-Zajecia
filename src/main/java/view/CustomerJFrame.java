@@ -54,7 +54,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         setTitle("Add Customer");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
-        jLabel1.setText("Pesel");
+        jLabel1.setText("PESEL");
 
         jLabel2.setText("First Name");
 
@@ -64,8 +64,9 @@ public class CustomerJFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Adress");
 
-        jLabel6.setText("Email");
+        jLabel6.setText("E-mail");
 
+        jButtonAddNewCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-add1.png"))); // NOI18N
         jButtonAddNewCustomer.setText("Add New");
         jButtonAddNewCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +74,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/go-previous1.png"))); // NOI18N
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +93,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
@@ -103,8 +105,8 @@ public class CustomerJFrame extends javax.swing.JFrame {
                         .addComponent(jTextFieldPhone)
                         .addComponent(jTextFieldAdress)
                         .addComponent(jTextFieldEmail))
-                    .addComponent(jButtonAddNewCustomer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(jButtonAddNewCustomer, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +135,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(46, 46, 46)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddNewCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))

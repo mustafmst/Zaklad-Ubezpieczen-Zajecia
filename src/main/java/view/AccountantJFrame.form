@@ -29,26 +29,23 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="686" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="GeneratePDFjButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="405" max="-2" attributes="0"/>
-                      <Component id="jButtonBack" pref="63" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="441" max="-2" attributes="0"/>
+                      <Component id="jButtonBack" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonLogout" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="262" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -56,7 +53,7 @@
                   <Component id="jButtonLogout" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonBack" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -131,6 +128,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="GeneratePDFjButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/x-office-document1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Generate PDF"/>
       </Properties>
       <Events>
@@ -139,6 +139,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonLogout">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/system-log-out1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
       <Events>
@@ -147,6 +150,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonBack">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/go-previous1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>

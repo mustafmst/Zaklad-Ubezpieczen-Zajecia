@@ -53,6 +53,7 @@ public class CalendarJFrame extends javax.swing.JFrame {
             .addGap(0, 225, Short.MAX_VALUE)
         );
 
+        jButtonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/go-previous1.png"))); // NOI18N
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

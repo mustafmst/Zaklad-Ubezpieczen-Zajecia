@@ -51,7 +51,7 @@ private final UserModel userModel = new UserModel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Employee");
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
+        setIconImages(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
         jLabelLogin.setText("Login");
 
@@ -59,6 +59,7 @@ private final UserModel userModel = new UserModel();
 
         jLabelStatus.setText("Status");
 
+        jButtonAddNewEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-add1.png"))); // NOI18N
         jButtonAddNewEmployee.setText("Add");
         jButtonAddNewEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +67,7 @@ private final UserModel userModel = new UserModel();
             }
         });
 
+        jButtonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/go-previous1.png"))); // NOI18N
         jButtonBack.setText("Back");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,9 +75,9 @@ private final UserModel userModel = new UserModel();
             }
         });
 
-        jLabel1.setText("Imię");
+        jLabel1.setText("First Name");
 
-        jLabel2.setText("Nazwisko");
+        jLabel2.setText("Last Name");
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADVISOR", "SECRETARY", "ACCOUNTANT", "DIRECTOR" }));
 
@@ -104,7 +106,7 @@ private final UserModel userModel = new UserModel();
                         .addComponent(jButtonBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonAddNewEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +131,7 @@ private final UserModel userModel = new UserModel();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addGap(61, 61, 61)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddNewEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))

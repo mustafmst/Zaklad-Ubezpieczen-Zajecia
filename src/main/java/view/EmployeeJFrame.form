@@ -53,7 +53,7 @@
                       <Component id="jButtonAddNewEmployee" min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,7 +85,7 @@
                   <Component id="jLabelStatus" max="32767" attributes="0"/>
                   <Component id="jComboBoxStatus" pref="30" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonAddNewEmployee" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="jButtonBack" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
@@ -117,6 +117,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonAddNewEmployee">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/list-add1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Add"/>
       </Properties>
       <Events>
@@ -125,6 +128,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonBack">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/go-previous1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
@@ -133,14 +139,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Imi&#x119;"/>
+        <Property name="text" type="java.lang.String" value="First Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldImie">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nazwisko"/>
+        <Property name="text" type="java.lang.String" value="Last Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNazwisko">

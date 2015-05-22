@@ -57,6 +57,7 @@ public class AdvisorJFrame extends javax.swing.JFrame {
             .addGap(0, 212, Short.MAX_VALUE)
         );
 
+        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/system-log-out1.png"))); // NOI18N
         jButtonLogout.setText("Logout");
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +83,7 @@ public class AdvisorJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jButtonLogout)
                 .addGap(26, 26, 26))
         );

@@ -41,7 +41,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -57,11 +57,11 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="61" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonAddNewAppointment" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,7 +96,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pesel"/>
+        <Property name="text" type="java.lang.String" value="PESEL"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -125,6 +125,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/go-previous1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
@@ -133,6 +136,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonAddNewAppointment">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icon/list-add1.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Add"/>
       </Properties>
       <Events>

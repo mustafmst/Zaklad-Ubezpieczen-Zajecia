@@ -42,7 +42,6 @@ public class DirectorJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
         jButtonAddEmployee = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButtonSearch = new javax.swing.JButton();
@@ -58,9 +57,8 @@ public class DirectorJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
-        jLabel3.setText("Add new employee");
-
-        jButtonAddEmployee.setText("Add");
+        jButtonAddEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-add1.png"))); // NOI18N
+        jButtonAddEmployee.setText("Add new employee");
         jButtonAddEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddEmployeeActionPerformed(evt);
@@ -69,6 +67,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Search for customers:");
 
+        jButtonSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/system-search1.png"))); // NOI18N
         jButtonSearch.setText("Search");
         jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +75,8 @@ public class DirectorJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Add");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-add1.png"))); // NOI18N
+        jButton1.setText("Add customer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -114,6 +114,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableCustomers);
 
+        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/system-log-out1.png"))); // NOI18N
         jButtonLogout.setText("Logout");
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +122,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonChanges.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit-find1.png"))); // NOI18N
         jButtonChanges.setText("Search Changes");
         jButtonChanges.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +130,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
             }
         });
 
+        Calender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/x-office-calendar1.png"))); // NOI18N
         Calender.setText("Calender");
         Calender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +138,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonTransactions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/image-loading2.png"))); // NOI18N
         jButtonTransactions.setText("Transactions");
         jButtonTransactions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,30 +152,28 @@ public class DirectorJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel4)
                             .addGap(18, 18, 18)
                             .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(jButtonSearch)
-                            .addGap(77, 77, 77)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(62, 62, 62)
+                            .addComponent(jButton1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAddEmployee)
+                        .addGap(45, 45, 45)
+                        .addComponent(jButtonTransactions)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
+                        .addGap(18, 18, 18)
                         .addComponent(Calender, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonLogout)))
-                .addContainerGap())
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,20 +187,14 @@ public class DirectorJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jButtonAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Calender, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(31, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonLogout)
-                        .addContainerGap())))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Calender, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLogout))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -330,7 +326,6 @@ public class DirectorJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JButton jButtonTransactions;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCustomers;

@@ -86,7 +86,7 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
         setTitle("Add Appointment");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
-        jLabel1.setText("Pesel");
+        jLabel1.setText("PESEL");
 
         jLabel2.setText("Hour");
 
@@ -96,6 +96,7 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
 
         jComboBoxAdvisor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { }));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/go-previous1.png"))); // NOI18N
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +104,7 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonAddNewAppointment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-add1.png"))); // NOI18N
         jButtonAddNewAppointment.setText("Add");
         jButtonAddNewAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +125,7 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
@@ -136,9 +138,9 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
                             .addComponent(jComboBoxPesel1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonAddNewAppointment)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
