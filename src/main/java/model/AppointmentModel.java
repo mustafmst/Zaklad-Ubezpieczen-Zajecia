@@ -63,4 +63,7 @@ public class AppointmentModel extends AbstractModel<Appointment> {
         }
         return app;
     }
+    
+    
+    
 }

@@ -64,7 +64,7 @@ public class HistoryJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Imie", "Nazwisko", "Stanowisko", "Zmiana", "Data"
+                "First Name", "Last Name", "Position", "Change", "Date"
             }
         ));
         jScrollPane1.setViewportView(jTableHistory);

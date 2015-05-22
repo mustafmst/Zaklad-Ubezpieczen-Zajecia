@@ -18,6 +18,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import model.HibernateUtil;
 import model.ServiceModel;
+import model.UserIdentify;
+import model.UserStatus;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -35,12 +37,21 @@ public class AccountantJFrame extends javax.swing.JFrame {
      * Creates new form AccountantJFrame
      */
     public AccountantJFrame() {
-        super("Welcome Accountant");
+        super("Welcome Accountant");    
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         transactionView();
     }
+	
+	//TODO
+		/*if(UserIdentify.status != UserStatus.ACCOUNTANT){
+			jButtonLogout.setVisible(false);
+		} 
+		else
+		{
+			jButtonBack.setVisible(false);
+		}*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +66,16 @@ public class AccountantJFrame extends javax.swing.JFrame {
         jTableAccountant = new javax.swing.JTable();
         GeneratePDFjButton = new javax.swing.JButton();
         jButtonLogout = new javax.swing.JButton();
-
+        jButtonBack = new javax.swing.JButton();
+		if(UserIdentify.status != UserStatus.ACCOUNTANT){
+			jButtonLogout.setVisible(false);
+		} 
+		else
+		{
+			jButtonBack.setVisible(false);
+		}
+		
+		
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
@@ -84,6 +104,13 @@ public class AccountantJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,26 +118,28 @@ public class AccountantJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                        .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(GeneratePDFjButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(23, 23, 23))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonLogout)
-                .addContainerGap())
+                        .addGap(405, 405, 405)
+                        .addComponent(jButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonLogout)
+                        .addGap(59, 59, 59))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(GeneratePDFjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(jButtonLogout)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GeneratePDFjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLogout)
+                    .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
         );
 
         pack();
@@ -168,6 +197,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GeneratePDFjButtonActionPerformed
 
+    
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -179,6 +209,10 @@ public class AccountantJFrame extends javax.swing.JFrame {
         loginFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButtonLogoutActionPerformed
+
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,14 +245,14 @@ public class AccountantJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new AccountantJFrame().setVisible(true);
-                
+                new AccountantJFrame().setVisible(true);               
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GeneratePDFjButton;
+    private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAccountant;

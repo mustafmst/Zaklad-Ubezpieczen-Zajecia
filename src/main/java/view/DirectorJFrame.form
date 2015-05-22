@@ -43,9 +43,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonAddEmployee" min="-2" pref="69" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButtonTransactions" min="-2" pref="101" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonChanges" min="-2" pref="149" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="Calender" min="-2" pref="138" max="-2" attributes="0"/>
@@ -79,8 +81,9 @@
                           <Component id="jButtonAddEmployee" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="jButtonChanges" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="Calender" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="jButtonTransactions" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace pref="31" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -180,6 +183,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CalenderActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonTransactions">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Transactions"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTransactionsActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

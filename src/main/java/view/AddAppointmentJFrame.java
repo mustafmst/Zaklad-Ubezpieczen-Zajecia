@@ -39,6 +39,7 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
     public AddAppointmentJFrame() {
         initComponents();
         addItem();
+        setComboBox();
     }
     
     public AddAppointmentJFrame(int dd, int mm, int yy) {
@@ -51,6 +52,7 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
         date = new Date(yy-1900,mm-1,dd);
         System.out.println(date);
         addItem();
+        setComboBox();
 
     }
 
@@ -63,26 +65,28 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBoxPesel = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldPesel = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jComboBoxHours = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxAdvisor = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jButtonAddNewAppointment = new javax.swing.JButton();
+        jComboBoxPesel1 = new javax.swing.JComboBox();
+
+        jComboBoxPesel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { }));
+        jComboBoxPesel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPeselActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Appointment");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
         jLabel1.setText("Pesel");
-
-        jTextFieldPesel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPeselActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Hour");
 
@@ -106,6 +110,13 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxPesel1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { }));
+        jComboBoxPesel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPesel1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,9 +131,9 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldPesel)
                             .addComponent(jComboBoxHours, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxAdvisor, 0, 113, Short.MAX_VALUE)))
+                            .addComponent(jComboBoxAdvisor, 0, 113, Short.MAX_VALUE)
+                            .addComponent(jComboBoxPesel1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
@@ -132,19 +143,19 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldPesel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPesel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxHours, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxAdvisor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBoxAdvisor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAddNewAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,7 +189,9 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
             Customer foundCustomer = null;
             
             Appointment appointment = new Appointment();
-            String pesel = this.jTextFieldPesel.getText();
+            
+            String pesel = jComboBoxPesel1.getSelectedItem().toString();
+           
             hour.setHours(this.jComboBoxHours.getSelectedIndex()+8);
             
             String showInputDialog = null;
@@ -225,10 +238,25 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonAddNewAppointmentActionPerformed
 
-    private void jTextFieldPeselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPeselActionPerformed
+    private void jComboBoxPeselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPeselActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPeselActionPerformed
+    }//GEN-LAST:event_jComboBoxPeselActionPerformed
 
+    private void jComboBoxPesel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPesel1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPesel1ActionPerformed
+
+    private void setComboBox() {
+       DefaultComboBoxModel model = (DefaultComboBoxModel) this.jComboBoxPesel1.getModel();
+        
+       List<Customer> listOfCustomer = customerModel.findAll();
+       for(Customer customer : listOfCustomer) {
+           model.addElement(customer.getPesel());
+           System.out.println("Pesel " + customer.getPesel());
+       }
+    
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -269,9 +297,10 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAddNewAppointment;
     private javax.swing.JComboBox jComboBoxAdvisor;
     private javax.swing.JComboBox jComboBoxHours;
+    private javax.swing.JComboBox jComboBoxPesel;
+    private javax.swing.JComboBox jComboBoxPesel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextFieldPesel;
     // End of variables declaration//GEN-END:variables
 }

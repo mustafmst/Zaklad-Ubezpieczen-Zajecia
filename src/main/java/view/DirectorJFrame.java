@@ -53,6 +53,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
         jButtonLogout = new javax.swing.JButton();
         jButtonChanges = new javax.swing.JButton();
         Calender = new javax.swing.JButton();
+        jButtonTransactions = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
@@ -134,6 +135,13 @@ public class DirectorJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonTransactions.setText("Transactions");
+        jButtonTransactions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTransactionsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,9 +161,11 @@ public class DirectorJFrame extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(104, 104, 104)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
                         .addComponent(Calender, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,8 +192,9 @@ public class DirectorJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jButtonAddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Calender, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(23, Short.MAX_VALUE))
+                            .addComponent(Calender, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(31, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonLogout)
@@ -238,6 +249,11 @@ public class DirectorJFrame extends javax.swing.JFrame {
        CalendarJFrame calendarFrame = new CalendarJFrame();
        calendarFrame.setVisible(true);
     }//GEN-LAST:event_CalenderActionPerformed
+
+    private void jButtonTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransactionsActionPerformed
+        AccountantJFrame accountantFrame = new AccountantJFrame();
+        accountantFrame.setVisible(true);
+    }//GEN-LAST:event_jButtonTransactionsActionPerformed
     
     private void clientSearch(){
         String[] search = this.jTextFieldSearch.getText().split(" ");
@@ -313,6 +329,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonChanges;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonSearch;
+    private javax.swing.JButton jButtonTransactions;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
