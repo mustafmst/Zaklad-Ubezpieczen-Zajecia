@@ -133,12 +133,12 @@ begin
     
     while( i < zm ) do
 			INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours)
-            VALUES (pesel,5,CURDATE()+i, '09:00:00'),
-				   (pesel,5,CURDATE()+i, '10:00:00'),
-				   (pesel,5,CURDATE()+i, '11:00:00'),
-				   (pesel,5,CURDATE()+i, '12:00:00'),
-                   (pesel,5,CURDATE()+i, '13:00:00'),
-                   (pesel,5,CURDATE()+i, '14:00:00');
+            VALUES (pesel,5,CURDATE()-i, '09:00:00'),
+				   (pesel,5,CURDATE()-i, '10:00:00'),
+				   (pesel,5,CURDATE()-i, '11:00:00'),
+				   (pesel,5,CURDATE()-i, '12:00:00'),
+                   (pesel,5,CURDATE()-i, '13:00:00'),
+                   (pesel,5,CURDATE()-i, '14:00:00');
 		set i = i + 1;
 	end while;
 end$$
@@ -153,7 +153,7 @@ begin
     
     while( i < zm ) do
 			insert into Service (pesel_fk,user_fk,serviceCost, insuranceCost, description, dateOfService, dateOfAddService)
-            Values (pesel,user, 100, 200, 'Opis bla bla',CURDATE()+i,CURDATE());
+            Values (pesel,user, 100, 200, 'Opis bla bla',CURDATE()-i,CURDATE());
             
 		set i = i + 1;
 	end while;
