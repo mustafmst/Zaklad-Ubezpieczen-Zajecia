@@ -161,10 +161,7 @@ public class Service implements Serializable {
             return false;
         }
         Service other = (Service) object;
-        if ((this.serviceId == null && other.serviceId != null) || (this.serviceId != null && !this.serviceId.equals(other.serviceId))) {
-            return false;
-        }
-        return true;
+        return !((this.serviceId == null && other.serviceId != null) || (this.serviceId != null && !this.serviceId.equals(other.serviceId)));
     }
 
     @Override

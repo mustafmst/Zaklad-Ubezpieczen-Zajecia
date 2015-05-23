@@ -13,12 +13,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.CustomerModel;
 import model.ServiceModel;
@@ -33,8 +31,7 @@ public class ServiceJFrame extends javax.swing.JFrame {
     private final ServiceModel serviceModel = new ServiceModel();
     private int day;
     private int month;
-    private int year;
-    
+    private int year;    
     private final CustomerModel customerModel = new CustomerModel();
     /**
      * Creates new form ServiceJFrame
@@ -188,24 +185,12 @@ public class ServiceJFrame extends javax.swing.JFrame {
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
 
         Service service = new Service();
-        
-//       DefaultComboBoxModel model = (DefaultComboBoxModel) this.jComboBoxPesel.getModel();
-//        
-//       List<Customer> listOfCustomer = customerModel.findAll();
-//       for(Customer customer : listOfCustomer) {
-//           model.addElement(customer.getPesel());
-//           System.out.println("Pesel " + customer.getPesel());
-//       }
-       String pesel = jComboBoxPesel.getSelectedItem().toString();
-        //String pesel = this.jTextFieldCustomer.getText();
-        
-        
+        String pesel = jComboBoxPesel.getSelectedItem().toString();
         Float serviceCost = Float.parseFloat(this.jTextFieldServiceCost.getText());
         Float insuranceCost = Float.parseFloat(this.jTextFieldInsuranceCost.getText());
         String description = this.jTextAreaDescription.getText();
         Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy");
-   
+        DateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy");  
         if (pesel.isEmpty() || serviceCost == null || insuranceCost == null || description.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fill field: ");
         } else {
@@ -234,7 +219,6 @@ public class ServiceJFrame extends javax.swing.JFrame {
                 Logger.getLogger(ServiceJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jTextFieldServiceCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldServiceCostActionPerformed
@@ -251,17 +235,13 @@ public class ServiceJFrame extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     */
-    
+     */   
     private void setComboBox() {
-       DefaultComboBoxModel model = (DefaultComboBoxModel) this.jComboBoxPesel.getModel();
-        
+       DefaultComboBoxModel model = (DefaultComboBoxModel) this.jComboBoxPesel.getModel();       
        List<Customer> listOfCustomer = customerModel.findAll();
        for(Customer customer : listOfCustomer) {
            model.addElement(customer.getPesel());
-           System.out.println("Pesel " + customer.getPesel());
-       }
-    
+       }   
     }
     
     public static void main(String args[]) {
@@ -290,6 +270,7 @@ public class ServiceJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ServiceJFrame().setVisible(true);
             }

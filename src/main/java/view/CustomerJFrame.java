@@ -145,6 +145,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @SuppressWarnings("SuspiciousIndentAfterControlStatement")
     private void jButtonAddNewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNewCustomerActionPerformed
         boolean customerExists = false;
         
@@ -229,7 +230,6 @@ public class CustomerJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill field: " + showInputDialog);
             } else if (foundCustomer == null) {
                 try {
-                //Customer customer = new Customer();
                 customer.setEmail(this.jTextFieldEmail.getText());
                 customer.setFirstName(this.jTextFieldFirstName.getText());
                 customer.setLastName((this.jTextFieldLastName.getText()));
@@ -242,10 +242,8 @@ public class CustomerJFrame extends javax.swing.JFrame {
                 } catch (NumberFormatException | HeadlessException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
-                //dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "There is such customer in Database!!!", "Warning!", JOptionPane.INFORMATION_MESSAGE);
-                //dispose();
             }
             
         } catch (NumberFormatException | HeadlessException e) {
@@ -295,22 +293,18 @@ public class CustomerJFrame extends javax.swing.JFrame {
     public boolean EmailValidation(String customerEmail)
     {
        String regex = ".+@.+\\.[a-z]+";
- 
        Pattern pattern = Pattern.compile(regex);
-       Matcher matcher = pattern.matcher(customerEmail);
-       
+       Matcher matcher = pattern.matcher(customerEmail);      
        return matcher.matches();
     }
-       public static boolean PeselValidation(String customerPesel) {
+    @SuppressWarnings("SuspiciousIndentAfterControlStatement")
+    public static boolean PeselValidation(String customerPesel) {
            int[] wagi = {1, 3, 7, 9, 1, 3, 7 ,9 ,1 ,3};
-           if (customerPesel.length() != 11) return false;
-           
-           int suma = 0;
-           
+           if (customerPesel.length() != 11) return false;          
+           int suma = 0;          
            for (int i = 0; i < 10; i++)
                suma += Integer.parseInt(customerPesel.substring(i, i+1)) * wagi[i];
-           int cyfraKontrolna = Integer.parseInt(customerPesel.substring(10, 11));
-           
+           int cyfraKontrolna = Integer.parseInt(customerPesel.substring(10, 11));          
            suma %= 10;
            if(suma==0)
            {
@@ -320,43 +314,35 @@ public class CustomerJFrame extends javax.swing.JFrame {
            return (suma == cyfraKontrolna);
     }
        
-       public boolean FirstNameValidation(String customerFirstName)
+    public boolean FirstNameValidation(String customerFirstName)
     {
        String regex = "[a-zA-Z]{3,12}";
- 
        Pattern pattern = Pattern.compile(regex);
-       Matcher matcher = pattern.matcher(customerFirstName);
-       
+       Matcher matcher = pattern.matcher(customerFirstName);      
        return matcher.matches();
     }
        
-       public boolean LastNameValidation(String customerLastName)
+    public boolean LastNameValidation(String customerLastName)
     {
-       String regex = "[a-zA-Z]{3,12}-?[a-zA-Z]*";
- 
+       String regex = "[a-zA-Z]{3,12}-?[a-zA-Z]*"; 
        Pattern pattern = Pattern.compile(regex);
-       Matcher matcher = pattern.matcher(customerLastName);
-       
+       Matcher matcher = pattern.matcher(customerLastName);      
        return matcher.matches();
     }
        
-       public boolean PhoneValidation(String customerPhone)
+    public boolean PhoneValidation(String customerPhone)
     {
        String regex = "\\+?[0-9]{6,12}";
- 
        Pattern pattern = Pattern.compile(regex);
-       Matcher matcher = pattern.matcher(customerPhone);
-       
+       Matcher matcher = pattern.matcher(customerPhone);      
        return matcher.matches();
     }
        
-       public boolean AdressValidation(String customerAdress)
+    public boolean AdressValidation(String customerAdress)
     {
        String regex = "[a-zA-Z]{2,15}.+ [0-9]{2}-([0-9]){3}( [a-zA-Z]{2,15})";
- 
        Pattern pattern = Pattern.compile(regex);
-       Matcher matcher = pattern.matcher(customerAdress);
-       
+       Matcher matcher = pattern.matcher(customerAdress);       
        return matcher.matches();
     }
        

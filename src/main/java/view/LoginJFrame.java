@@ -10,8 +10,6 @@ import model.*;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 import model.UserModel;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 /**
  *
  * @author Damian Mamla
@@ -25,46 +23,33 @@ public class LoginJFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginJFrame
      */
-    public LoginJFrame() {
-         
+    public LoginJFrame() {        
         initComponents();
-        
-       
-        
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jTextFieldLogin.requestFocus();
     }
     
-    public void LoginAction(){
-        
+    public void LoginAction(){       
         try {
             User user = new User();
             user.setLogin(this.jTextFieldLogin.getText());
             user.setPassword(String.valueOf(this.jPasswordField.getPassword()));
-            System.out.println(user.getLogin() + " " + user.getPassword() + " !!!");
-
             boolean isLogged = false;
-
             for (User u : this.userModel.findAll()) {
-                System.out.println(this.userModel.genrateMD5(u.getPassword()));
-                if (u.getLogin().equals(user.getLogin()) && this.userModel.genrateMD5(user.getPassword()).equals(u.getPassword())) {
-      
+                if (u.getLogin().equals(user.getLogin()) && this.userModel.genrateMD5(user.getPassword()).equals(u.getPassword())) {      
                     Templogin templogin = new Templogin();
                     templogin.setUserId(u.getUserId());
                     this.loginModel.create(templogin);                 
                     isLogged = true;
-                    System.out.println(user.getLogin() + " " + user.getPassword() + "!!!");
                     JOptionPane.showMessageDialog(null, "You have logged in successfully.", "Success",
                             JOptionPane.INFORMATION_MESSAGE);
                     int status = u.getStatus();
-                    System.out.println("Status: " + status);
                     UserIdentify.status = status;
                     UserIdentify.userId = u.getUserId();
                     UserIdentify.nazwisko = u.getNazwisko();
                     UserIdentify.imie = u.getImie();
                     if (UserStatus.DIRECTOR == status) {
-                        System.out.println("DIRECTOR!!!");
                         DirectorJFrame directorFrame = new DirectorJFrame();
                         directorFrame.setVisible(true);
                     } else if (UserStatus.SECRETARY == status) {
@@ -89,8 +74,7 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        
+        }       
     }
 
     /**
@@ -215,7 +199,6 @@ public class LoginJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-
         LoginAction();
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
@@ -260,8 +243,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
-            public void run() {
-                
+            public void run() {                
                 new LoginJFrame().setVisible(true);
             }
         });

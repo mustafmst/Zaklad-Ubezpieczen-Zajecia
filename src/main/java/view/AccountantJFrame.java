@@ -9,11 +9,7 @@ import com.itextpdf.text.DocumentException;
 import entities.Service;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,11 +21,8 @@ import javax.swing.table.DefaultTableModel;
 import model.HibernateUtil;
 import model.ServiceModel;
 import model.UserIdentify;
-import model.UserStatus;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.jdesktop.swingx.JXDatePicker;
-
 import pdf.GeneratePDF;
 
 /**
@@ -59,14 +52,6 @@ public class AccountantJFrame extends javax.swing.JFrame {
         transactionView();
     }
 
-	//TODO
-		/*if(UserIdentify.status != UserStatus.ACCOUNTANT){
-     jButtonLogout.setVisible(false);
-     } 
-     else
-     {
-     jButtonBack.setVisible(false);
-     }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -206,7 +191,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void transactionView() {
-        List<Service> wynik = new ArrayList<Service>();
+        List<Service> wynik = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) this.jTableAccountant.getModel();
         model.setRowCount(0);
         try {
@@ -222,8 +207,9 @@ public class AccountantJFrame extends javax.swing.JFrame {
         }
     }
 
+    @SuppressWarnings("null")
     private void transactionViewWithDate(Date from, Date to) {
-        List<Service> wynik = new ArrayList<Service>();
+        List<Service> wynik = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) this.jTableAccountant.getModel();
         model.setRowCount(0);
         try {

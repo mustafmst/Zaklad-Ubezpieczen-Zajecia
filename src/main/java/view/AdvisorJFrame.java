@@ -25,8 +25,7 @@ public class AdvisorJFrame extends javax.swing.JFrame {
     public AdvisorJFrame() {
         super("Welcome Advisor " + UserIdentify.imie + " " + UserIdentify.nazwisko);
         initComponents();
-        Container c = this.jPanel1;
-        
+        Container c = this.jPanel1;       
         c.setLayout(new FlowLayout());
         c.add(new Cal());
     }
@@ -132,6 +131,7 @@ public class AdvisorJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AdvisorJFrame().setVisible(true);
             }

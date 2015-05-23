@@ -25,14 +25,14 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
     private int year;
     
     private Date date;
+    @SuppressWarnings("FieldMayBeFinal")
     private Time hour = new Time(00,00,00);
     
-     private final UserModel user = new UserModel();
-     private final CustomerModel customerModel = new CustomerModel();
-     private final AppointmentModel appointmentModel = new AppointmentModel();
-     List<User> wynik = new ArrayList<User>();
-     //private Vector<Integer> advisors = new Vector<Integer>();
-     private Integer[] advisors;
+    private final UserModel user = new UserModel();
+    private final CustomerModel customerModel = new CustomerModel();
+    private final AppointmentModel appointmentModel = new AppointmentModel();
+    List<User> wynik = new ArrayList<>();
+    private Integer[] advisors;
     /**
      * Creates new form AddAppointmentJFrame
      */
@@ -48,12 +48,9 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
         this.day = dd;
         this.month = mm;
         this.year = yy;
-
         date = new Date(yy-1900,mm-1,dd);
-        System.out.println(date);
         addItem();
         setComboBox();
-
     }
 
     /**
@@ -169,7 +166,6 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
 
     public final void addItem(){
         DefaultComboBoxModel model = (DefaultComboBoxModel) this.jComboBoxAdvisor.getModel();
-//        model.setValueAt("pesel_1", 2, 3);
         wynik = this.user.findId_advisors();
         advisors = new Integer[wynik.size()];
         int i = 0;
@@ -186,16 +182,12 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonAddNewAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNewAppointmentActionPerformed
-        // TODO add your handling code here:
+
         try {
-            Customer foundCustomer = null;
-            
-            Appointment appointment = new Appointment();
-            
-            String pesel = jComboBoxPesel1.getSelectedItem().toString();
-           
-            hour.setHours(this.jComboBoxHours.getSelectedIndex()+8);
-            
+            Customer foundCustomer = null;           
+            Appointment appointment = new Appointment();           
+            String pesel = jComboBoxPesel1.getSelectedItem().toString();          
+            hour.setHours(this.jComboBoxHours.getSelectedIndex()+8);            
             String showInputDialog = null;
             boolean isFill = true;
 
@@ -229,10 +221,8 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
                 } else{
                     JOptionPane.showMessageDialog(null, "The customer already has a visit for the day!!!", "Warning!", JOptionPane.INFORMATION_MESSAGE);
                 }
-                //dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "No such customer in the database!!!", "Warning!", JOptionPane.INFORMATION_MESSAGE);
-                //dispose();
             }
             
         } catch (NumberFormatException | HeadlessException e) {
@@ -249,14 +239,11 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxPesel1ActionPerformed
 
     private void setComboBox() {
-       DefaultComboBoxModel model = (DefaultComboBoxModel) this.jComboBoxPesel1.getModel();
-        
+       DefaultComboBoxModel model = (DefaultComboBoxModel) this.jComboBoxPesel1.getModel();       
        List<Customer> listOfCustomer = customerModel.findAll();
        for(Customer customer : listOfCustomer) {
            model.addElement(customer.getPesel());
-           System.out.println("Pesel " + customer.getPesel());
-       }
-    
+       }    
     }
     
     /**
@@ -288,6 +275,7 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AddAppointmentJFrame().setVisible(true);
             }

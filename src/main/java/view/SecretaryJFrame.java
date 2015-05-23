@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.table.*;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-
 /**
  *
  * @author Damian Mamla
@@ -21,8 +20,7 @@ import org.hibernate.Session;
  */
 public class SecretaryJFrame extends javax.swing.JFrame {
     
-    private final CustomerModel customerModel = new CustomerModel();
-    
+    private final CustomerModel customerModel = new CustomerModel();   
     /**
      * Creates new form SecretaryJFrame
      */
@@ -173,10 +171,9 @@ public class SecretaryJFrame extends javax.swing.JFrame {
         String[] search = this.jTextFieldSearch.getText().split(" ");
         int searchInt;
         int tmp;
-        List<Customer> wynik = new ArrayList<Customer>();
+        List<Customer> wynik = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) this.jTableCustomers.getModel();
-        model.setRowCount(0);
-        
+        model.setRowCount(0);       
         try{            
             for(Customer c : this.customerModel.findAll()){
                 tmp=0;
@@ -187,20 +184,18 @@ public class SecretaryJFrame extends javax.swing.JFrame {
                         searchInt = 0;
                     }
                     if( (s.equals(c.getFirstName())) || (s.equals(c.getLastName())) || (s.equals(c.getEmail())) || (s.equals(c.getAdress())) || (s.equals(c.getPesel())) || (searchInt == c.getPhone()) ){
-                    //wynik.add(c);
                         tmp++;
                     }
                 }
                 if(tmp == search.length) wynik.add(c);
             }
         }catch(Exception e){
-            
+            e.printStackTrace();
         }
         
         for(Customer c : wynik ){
             model.addRow(new Object[]{c.getFirstName(),c.getLastName(),c.getPesel(),c.getAdress(),c.getEmail(),c.getPhone()});
-        }
-        
+        }      
     }
     
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed

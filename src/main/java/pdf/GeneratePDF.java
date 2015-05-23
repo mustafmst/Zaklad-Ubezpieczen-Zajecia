@@ -27,15 +27,7 @@ import model.ServiceModel;
  */
 public class GeneratePDF {
     
-    /*
-    public static final String RESULT = "accountant.pdf";
-    
-    public static void main(String[] args) throws DocumentException, IOException {
-    	new GeneratePDF().createPdf(RESULT);
-    }
-    */
-        
-    public void createPdf(String filename)
+ public void createPdf(String filename)
 	throws DocumentException, IOException {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(filename));
@@ -66,14 +58,14 @@ public class GeneratePDF {
         table.addCell(new Paragraph("Cost", new Font(FontFamily.HELVETICA, 11)));
         table.addCell(new Paragraph("Date", new Font(FontFamily.HELVETICA, 11)));
         
-        List<Service> transactions = new ArrayList<Service>();
+        List<Service> transactions = new ArrayList<>();
         try{
-            for( Service c : this.serviceModel.findAll() )
-            {
+            for (Service c : this.serviceModel.findAll()) {
                 transactions.add(c);
             }
         }
         catch(Exception e){
+            e.printStackTrace();
         }
         
         for (Service c : transactions)

@@ -111,10 +111,7 @@ public class History implements Serializable {
             return false;
         }
         History other = (History) object;
-        if ((this.hisId == null && other.hisId != null) || (this.hisId != null && !this.hisId.equals(other.hisId))) {
-            return false;
-        }
-        return true;
+        return !((this.hisId == null && other.hisId != null) || (this.hisId != null && !this.hisId.equals(other.hisId)));
     }
 
     @Override

@@ -6,15 +6,12 @@
 package view;
 
 import entities.History;
-import entities.Service;
 import entities.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import model.HistoryModel;
-import model.LoginModel;
-import model.ServiceModel;
 import model.UserModel;
 
 /**
@@ -33,8 +30,7 @@ public class HistoryJFrame extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        transactionView();
-                
+        transactionView();              
     }
 
     /**
@@ -95,34 +91,24 @@ public class HistoryJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
       private void transactionView(){
-        List<History> wynik = new ArrayList<History>();
-        
+        List<History> wynik = new ArrayList<>();   
         DefaultTableModel model = (DefaultTableModel) this.jTableHistory.getModel();
         model.setRowCount(0);
-        try{
-            
+        try{            
             for(History h : this.historyModel.findAll()){
-                System.out.println("tu");
                 wynik.add(h);
             }
         }catch(Exception e){
-         e.printStackTrace();
+            e.printStackTrace();
         }
-        System.out.println("leng " + wynik.size());
-        
-        System.out.println("Daniel to pierdola");
+
         for(History h : wynik ){
             int id = h.getUserId();
-            System.out.println("id " + id);
             User user = this.userModel.find(id);
-            System.out.println("imie " + user.getImie());
             model.addRow(new Object[]{user.getImie(), user.getNazwisko(), user.getStanowisko(),h.getWhatChange(),h.getDateOfChange()});
         }
     }
-    
-    
-    
-    
+ 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
@@ -156,6 +142,7 @@ public class HistoryJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new HistoryJFrame().setVisible(true);
             }

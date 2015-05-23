@@ -21,7 +21,7 @@ import org.hibernate.Session;
  * @author Damian Mamla
  */
 public class UserModel extends AbstractModel<User> {
- 
+
     public UserModel() {
         super(User.class);
     }
@@ -42,9 +42,9 @@ public class UserModel extends AbstractModel<User> {
         }
         return sb.toString();
     }
-    
+
     public List<User> findId_advisors() {
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
@@ -53,7 +53,7 @@ public class UserModel extends AbstractModel<User> {
             query.addEntity(User.class);
             List results = query.list();
             for (Object l : results) {
-                users.add((User)l);
+                users.add((User) l);
             }
             session.getTransaction().commit();
         } catch (HibernateException he) {

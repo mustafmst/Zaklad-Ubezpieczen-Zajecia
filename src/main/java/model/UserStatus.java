@@ -5,8 +5,6 @@
  */
 package model;
 
-import entities.User;
-
 /**
  *
  * @author Damian Mamla

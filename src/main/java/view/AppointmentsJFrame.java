@@ -5,7 +5,6 @@
  */
 package view;
 
-import javax.swing.JFrame;
 import model.*;
 import entities.*;
 import java.util.Vector;
@@ -22,10 +21,8 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
     private int day;
     private int month;
     private int year;
-    private boolean firstOpen;
-    
-    Date date;
-    
+    private boolean firstOpen; 
+    Date date;   
     private final UserModel user = new UserModel();
     private final AppointmentModel appointment = new AppointmentModel();
     private final CustomerModel customer = new CustomerModel();
@@ -43,14 +40,10 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
         initComponents();
         this.day = dd;
         this.month = mm + 1; //add 1 month because we have indexes from 0
-        this.year = yy;
-        System.out.println("Data: " + dd + mm + yy);
-        
+        this.year = yy;    
         date = new Date(yy,(mm+1),dd);
         firstOpen = true;
-        createTable();
-        
-        
+        createTable();     
     }
 
     /**
@@ -63,8 +56,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
     public final void createTable(){
         Customer tmp;
         DefaultTableModel model = (DefaultTableModel) this.jAppointmentTable.getModel();
-//        model.setValueAt("pesel_1", 2, 3);
-        Vector<Integer> advisors = new Vector<Integer>();
+        Vector<Integer> advisors = new Vector<>();
         for(User A : this.user.findId_advisors()){
             advisors.addElement(A.getUserId());
             if(firstOpen){
@@ -72,13 +64,11 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
             }
         }
         firstOpen = false;
-        List<Appointment> app = new ArrayList<Appointment>();
+        List<Appointment> app = new ArrayList<>();
         for(Appointment A : this.appointment.findAppointment(date)){
             app.add(A);
         }
-        System.out.println("Ile:   "+app.size());
         for(Appointment A : app){
-            System.out.println("Pesel:   "+A.getPesel()+"  godzina:  "+(A.getHours().getHours())+"  doradca:  "+advisors.indexOf(A.getId_advisor()));
             tmp = this.customer.find(A.getPesel());
             model.setValueAt(tmp.getFirstName()+" "+tmp.getLastName(), A.getHours().getHours()-8,advisors.indexOf(A.getId_advisor()) );
         }
@@ -242,6 +232,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AppointmentsJFrame().setVisible(true);
             }

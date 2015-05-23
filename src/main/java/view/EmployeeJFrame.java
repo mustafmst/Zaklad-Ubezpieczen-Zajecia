@@ -7,12 +7,10 @@ package view;
 
 /**
  *
- * @author Michal
+ * @author Michal, Damian Mamla
  */
 import entities.User;
 import java.awt.HeadlessException;
-import java.awt.Image;
-import java.util.List;
 import javax.swing.JOptionPane;
 import model.UserModel;
 import model.UserStatus;
@@ -140,6 +138,7 @@ private final UserModel userModel = new UserModel();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+@SuppressWarnings("SuspiciousIndentAfterControlStatement")
     private void jButtonAddNewEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNewEmployeeActionPerformed
         try {
 
@@ -151,21 +150,20 @@ private final UserModel userModel = new UserModel();
 
             String status = jComboBoxStatus.getSelectedItem().toString();
             int statusInt = 0;
-            if("ADVISOR".equals(status))
-            {
-                statusInt = UserStatus.ADVISOR;
-            }
-            else if("SECRETARY".equals(status))
-            {
-                statusInt = UserStatus.SECRETARY;
-            }
-            else if("ACCOUNTANT".equals(status))
-            {
-                statusInt = UserStatus.ACCOUNTANT;
-            }
-              else if("DIRECTOR".equals(status))
-            {
-                statusInt = UserStatus.DIRECTOR;
+            if(null != status)
+            switch (status) {
+                case "ADVISOR":
+                    statusInt = UserStatus.ADVISOR;
+                    break;
+                case "SECRETARY":
+                    statusInt = UserStatus.SECRETARY;
+                    break;
+                case "ACCOUNTANT":
+                    statusInt = UserStatus.ACCOUNTANT;
+                    break;
+                case "DIRECTOR":
+                    statusInt = UserStatus.DIRECTOR;
+                    break;
             }
             String showInputDialog = null;
             boolean isFill = true;
@@ -194,7 +192,6 @@ private final UserModel userModel = new UserModel();
                 user.setPassword(this.jTextFieldPassword.getText());
                 user.setStanowisko(status);
                 user.setStatus(statusInt);
-
             }
 
             if (isFill == false) {
@@ -205,7 +202,6 @@ private final UserModel userModel = new UserModel();
                 user.setLogin(this.jTextFieldLogin.getText());
                 String pass = this.userModel.genrateMD5(password);
                 user.setPassword(pass);
-
                 user.setStanowisko(status);
                 user.setStatus(statusInt);
                 this.userModel.create(user);
@@ -214,9 +210,7 @@ private final UserModel userModel = new UserModel();
                 } catch (NumberFormatException | HeadlessException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
-                //dispose();
             }
-
         } catch (NumberFormatException | HeadlessException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }

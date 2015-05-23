@@ -8,7 +8,6 @@ package entities;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -13,8 +13,7 @@ import entities.Service;
  * @author Damian Mamla
  */
 public class ServiceModel extends AbstractModel<Service>{
-    
-    
+      
      public ServiceModel() {
         super(Service.class);
     }

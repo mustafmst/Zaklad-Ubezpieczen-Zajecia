@@ -22,8 +22,7 @@ import org.hibernate.Session;
  */
 public class DirectorJFrame extends javax.swing.JFrame {
 
-    private final CustomerModel customerModel = new CustomerModel();
-    
+    private final CustomerModel customerModel = new CustomerModel();   
     /**
      * Creates new form DirectorJFrame
      */
@@ -229,11 +228,9 @@ public class DirectorJFrame extends javax.swing.JFrame {
         String sql = "{call ProcedureTempLogin()}";
         SQLQuery query = session.createSQLQuery(sql);
         query.executeUpdate();
-        session.getTransaction().commit();
-       
+        session.getTransaction().commit();     
         LoginJFrame loginFrame = new LoginJFrame();
-        loginFrame.setVisible(true);
-   
+        loginFrame.setVisible(true); 
         dispose();
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
@@ -256,7 +253,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
         String[] search = this.jTextFieldSearch.getText().split(" ");
         int searchInt;
         int tmp;
-        List<Customer> wynik = new ArrayList<Customer>();
+        List<Customer> wynik = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) this.jTableCustomers.getModel();
         model.setRowCount(0);
         
@@ -270,7 +267,6 @@ public class DirectorJFrame extends javax.swing.JFrame {
                         searchInt = 0;
                     }
                     if( (s.equals(c.getFirstName())) || (s.equals(c.getLastName())) || (s.equals(c.getEmail())) || (s.equals(c.getAdress())) || (s.equals(c.getPesel())) || (searchInt == c.getPhone()) ){
-                    //wynik.add(c);
                         tmp++;
                     }
                 }

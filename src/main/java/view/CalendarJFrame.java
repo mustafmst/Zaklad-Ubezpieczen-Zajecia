@@ -21,7 +21,6 @@ public class CalendarJFrame extends javax.swing.JFrame {
     public CalendarJFrame() {
         initComponents();
         Container c = this.jPanelCal;
-
         c.setLayout(new FlowLayout());
         c.add(new Cal());
     }
@@ -118,13 +117,12 @@ public class CalendarJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CalendarJFrame().setVisible(true);
             }
         });
-
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBack;
     private javax.swing.JPanel jPanelCal;

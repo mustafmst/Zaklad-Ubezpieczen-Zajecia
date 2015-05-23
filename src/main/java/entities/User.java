@@ -17,13 +17,15 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
-/*
+
+/**
+ *
  * @author Damian Mamla
  */
-
 @Entity
 @Table(name="user")
 
+@SuppressWarnings("ValidPrimaryTableName")
 public class User implements java.io.Serializable {
     @Basic(optional = false)
     @Lob
@@ -143,10 +145,7 @@ public class User implements java.io.Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
-            return false;
-        }
-        return true;
+        return !((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId)));
     }
 
     @Override

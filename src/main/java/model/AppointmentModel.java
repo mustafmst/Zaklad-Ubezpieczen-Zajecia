@@ -9,7 +9,6 @@ import entities.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -18,52 +17,44 @@ import org.hibernate.Session;
  * @author DR
  */
 public class AppointmentModel extends AbstractModel<Appointment> {
-    
+
     public AppointmentModel() {
         super(Appointment.class);
     }
-    
+
     public List<Appointment> findAppointment(Date date) {
-        List<Appointment> app = new ArrayList<Appointment>();
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            String sql = "SELECT * FROM Appointment WHERE dateofAddAppointment = '"+
-                    date.getYear()+"-"+date.getMonth()+"-"+date.getDate()+"'";
-            SQLQuery query = session.createSQLQuery(sql);
-            query.addEntity(Appointment.class);
-            List results = query.list();
-            for (Object l : results) {
-                app.add((Appointment)l);
-            }
-            session.getTransaction().commit();
-        } catch (HibernateException he) {
-            he.printStackTrace();
+        List<Appointment> app = new ArrayList<>();
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT * FROM Appointment WHERE dateofAddAppointment = '"
+                + date.getYear() + "-" + date.getMonth() + "-" + date.getDate() + "'";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(Appointment.class);
+        List results = query.list();
+        for (Object l : results) {
+            app.add((Appointment) l);
         }
+        session.getTransaction().commit();
+
         return app;
     }
-    
+
     public Appointment findAppointmentPesel(Date date, String pesel) {
         Appointment app = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            String sql = "SELECT * FROM Appointment WHERE dateofAddAppointment = '"+
-                    (1900+date.getYear())+"-"+(1+date.getMonth())+"-"+date.getDate()+"'"+
-                    " and pesel = '"+pesel+"'";
-            SQLQuery query = session.createSQLQuery(sql);
-            query.addEntity(Appointment.class);
-            List results = query.list();
-            for (Object l : results) {
-                app=(Appointment)l;
-            }
-            session.getTransaction().commit();
-        } catch (HibernateException he) {
-            he.printStackTrace();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT * FROM Appointment WHERE dateofAddAppointment = '"
+                + (1900 + date.getYear()) + "-" + (1 + date.getMonth()) + "-" + date.getDate() + "'"
+                + " and pesel = '" + pesel + "'";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(Appointment.class);
+        List results = query.list();
+        for (Object l : results) {
+            app = (Appointment) l;
         }
+        session.getTransaction().commit();
         return app;
     }
-    
-    
-    
+
 }
