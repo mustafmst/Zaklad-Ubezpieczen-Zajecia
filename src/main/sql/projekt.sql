@@ -1,4 +1,5 @@
-
+drop database IF EXISTS projekt;
+create database projekt;
 use  projekt;
 
 drop table IF EXISTS Appointment;

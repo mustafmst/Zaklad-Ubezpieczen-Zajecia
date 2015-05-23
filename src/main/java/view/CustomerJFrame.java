@@ -188,15 +188,11 @@ public class CustomerJFrame extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, "Invalid phone number. Please enter correct phone number."); 
                 return;
-            }else
-            
-            if((AdressValidation(adress))==false)
+            }else if((AdressValidation(adress))==false)
             {
                 JOptionPane.showMessageDialog(null, "Invalid Adress. Please enter correct adress."); 
                 return;
-            }else
-                
-            if (email.isEmpty()) {
+            }else if (email.isEmpty()) {
                 showInputDialog = "email";
                 isFill = false;
             } else if (firstName.isEmpty()) {
