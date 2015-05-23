@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import model.CustomerModel;
 import model.HibernateUtil;
+import model.UserIdentify;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -27,7 +28,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
      * Creates new form DirectorJFrame
      */
     public DirectorJFrame() {
-        super("Welcome Director");
+        super("Welcome Director " + UserIdentify.imie + " " + UserIdentify.nazwisko);
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -247,7 +248,7 @@ public class DirectorJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_CalenderActionPerformed
 
     private void jButtonTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransactionsActionPerformed
-        AccountantJFrame accountantFrame = new AccountantJFrame();
+        AccountantJFrame accountantFrame = new AccountantJFrame(UserIdentify.imie,UserIdentify.nazwisko);
         accountantFrame.setVisible(true);
     }//GEN-LAST:event_jButtonTransactionsActionPerformed
     

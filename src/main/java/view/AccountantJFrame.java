@@ -4,11 +4,17 @@
  * and open the template in the editor.
  */
 package view;
+
 import com.itextpdf.text.DocumentException;
 import entities.Service;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,37 +28,45 @@ import model.UserIdentify;
 import model.UserStatus;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.jdesktop.swingx.JXDatePicker;
 
 import pdf.GeneratePDF;
 
 /**
  *
- * @author Piotr Filipowicz
+ * @author Piotr Filipowicz, Damian Mamla
  */
 public class AccountantJFrame extends javax.swing.JFrame {
 
     private final ServiceModel serviceModel = new ServiceModel();
-    
+
     /**
      * Creates new form AccountantJFrame
      */
     public AccountantJFrame() {
-        super("Welcome Accountant");    
+        super("Welcome Accountant " + UserIdentify.imie + " " + UserIdentify.nazwisko);
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         transactionView();
     }
-	
+    
+    public AccountantJFrame(String imie, String nazwisko) {
+        super("Transactions");
+        initComponents();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        transactionView();
+    }
+
 	//TODO
 		/*if(UserIdentify.status != UserStatus.ACCOUNTANT){
-			jButtonLogout.setVisible(false);
-		} 
-		else
-		{
-			jButtonBack.setVisible(false);
-		}*/
-
+     jButtonLogout.setVisible(false);
+     } 
+     else
+     {
+     jButtonBack.setVisible(false);
+     }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,14 +81,12 @@ public class AccountantJFrame extends javax.swing.JFrame {
         GeneratePDFjButton = new javax.swing.JButton();
         jButtonLogout = new javax.swing.JButton();
         jButtonBack = new javax.swing.JButton();
-		
-		if(UserIdentify.status != UserStatus.ACCOUNTANT){
-			jButtonLogout.setVisible(false);
-		} 
-		else
-		{
-			jButtonBack.setVisible(false);
-		}
+        jDateChooserOd = new com.toedter.calendar.JDateChooser();
+        jDateChooserDo = new com.toedter.calendar.JDateChooser();
+        jLabelFrom = new javax.swing.JLabel();
+        jLabelTo = new javax.swing.JLabel();
+        jButtonFind = new javax.swing.JButton();
+        jButtonClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
@@ -114,61 +126,130 @@ public class AccountantJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabelFrom.setText("Date From");
+
+        jLabelTo.setText("Date To");
+
+        jButtonFind.setText("Find");
+        jButtonFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFindActionPerformed(evt);
+            }
+        });
+
+        jButtonClear.setText("Clear");
+        jButtonClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
+                .addComponent(GeneratePDFjButton)
+                .addGap(104, 104, 104)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelFrom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(GeneratePDFjButton)
-                        .addGap(441, 441, 441)
-                        .addComponent(jButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonLogout))
-                    .addComponent(jScrollPane1))
+                        .addComponent(jDateChooserDo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonClear))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jDateChooserOd, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonFind, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(88, 88, 88)
+                .addComponent(jButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonLogout)
                 .addGap(23, 23, 23))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GeneratePDFjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLogout)
-                    .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(GeneratePDFjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonLogout)
+                            .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabelFrom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jDateChooserOd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonFind))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooserDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonClear))
+                        .addGap(30, 30, 30))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void transactionView(){
+    private void transactionView() {
         List<Service> wynik = new ArrayList<Service>();
         DefaultTableModel model = (DefaultTableModel) this.jTableAccountant.getModel();
         model.setRowCount(0);
-        try{
-            for(Service c : this.serviceModel.findAll()){
+        try {
+            for (Service c : this.serviceModel.findAll()) {
                 wynik.add(c);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        for(Service c : wynik ){
-            model.addRow(new Object[]{c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko() ,c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName(),c.getDescription(),c.getInsuranceCost(),c.getServiceCost(),c.getInsuranceCost()+c.getServiceCost(),c.getDateOfService()});
+
+        for (Service c : wynik) {
+            model.addRow(new Object[]{c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko(), c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName(), c.getDescription(), c.getInsuranceCost(), c.getServiceCost(), c.getInsuranceCost() + c.getServiceCost(), c.getDateOfService()});
         }
     }
-    
+
+    private void transactionViewWithDate(Date from, Date to) {
+        List<Service> wynik = new ArrayList<Service>();
+        DefaultTableModel model = (DefaultTableModel) this.jTableAccountant.getModel();
+        model.setRowCount(0);
+        try {
+            for (Service c : this.serviceModel.findAll()) {
+                wynik.add(c);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for (Service c : wynik) {
+            if (from == null && c.getDateOfService().getDate() < to.getDate()) {
+                model.addRow(new Object[]{c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko(), c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName(), c.getDescription(), c.getInsuranceCost(), c.getServiceCost(), c.getInsuranceCost() + c.getServiceCost(), c.getDateOfService()});
+            } else if (to == null && c.getDateOfService().getDate() > from.getDate()) {
+                model.addRow(new Object[]{c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko(), c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName(), c.getDescription(), c.getInsuranceCost(), c.getServiceCost(), c.getInsuranceCost() + c.getServiceCost(), c.getDateOfService()});
+            } else if (from != null && to != null && c.getDateOfService().getDate() <= to.getDate() && c.getDateOfService().getDate() >= from.getDate()) {
+                model.addRow(new Object[]{c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko(), c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName(), c.getDescription(), c.getInsuranceCost(), c.getServiceCost(), c.getInsuranceCost() + c.getServiceCost(), c.getDateOfService()});
+            }
+        }
+    }
     private void GeneratePDFjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneratePDFjButtonActionPerformed
         String filepath = "accountant.pdf";
-        
-        FileFilter pdf = new FileNameExtensionFilter("PDF File","pdf");
+
+        FileFilter pdf = new FileNameExtensionFilter("PDF File", "pdf");
         File workingDirectory = new File(System.getProperty("user.dir"));
-        
+
         JFileChooser fs = new JFileChooser();
         fs.setDialogTitle("Save file as...");
         fs.addChoosableFileFilter(pdf);
@@ -179,9 +260,8 @@ public class AccountantJFrame extends javax.swing.JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             File fi = fs.getSelectedFile();
             try {
-                filepath = fi.getPath()+".pdf";
-            }
-            catch (Exception e2) {
+                filepath = fi.getPath() + ".pdf";
+            } catch (Exception e2) {
                 JOptionPane.showMessageDialog(null, e2.getMessage());
             }
         }
@@ -193,12 +273,12 @@ public class AccountantJFrame extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(AccountantJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        JOptionPane.showMessageDialog(null, "Document "+filepath+" has been generated!", "Success",
-        JOptionPane.INFORMATION_MESSAGE);
+
+        JOptionPane.showMessageDialog(null, "Document " + filepath + " has been generated!", "Success",
+                JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GeneratePDFjButtonActionPerformed
 
-    
+
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -212,8 +292,35 @@ public class AccountantJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+
         dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
+
+    private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
+        
+        Date dateTo = jDateChooserDo.getDate(); 
+        Date dateFrom = jDateChooserOd.getDate();
+        if (dateTo != null && dateFrom != null) {
+            if (dateTo.getDate() >= dateFrom.getDate()) {
+                transactionViewWithDate(dateFrom, dateTo);
+            } else {
+                JOptionPane.showMessageDialog(null, "Date From can not be bigger than Date To", "Fail",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (dateTo != null) {
+            transactionViewWithDate(null, dateTo);
+        } else if (dateFrom != null) {
+            transactionViewWithDate(dateFrom, null);
+        } else {
+                JOptionPane.showMessageDialog(null, "Bad date!!!", "Error",
+                    JOptionPane.ERROR_MESSAGE);           
+        }
+    }//GEN-LAST:event_jButtonFindActionPerformed
+
+    private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
+        jDateChooserOd.setDate(null);
+        jDateChooserDo.setDate(null);
+    }//GEN-LAST:event_jButtonClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,7 +353,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new AccountantJFrame().setVisible(true);               
+                new AccountantJFrame().setVisible(true);
             }
         });
     }
@@ -254,7 +361,13 @@ public class AccountantJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GeneratePDFjButton;
     private javax.swing.JButton jButtonBack;
+    private javax.swing.JButton jButtonClear;
+    private javax.swing.JButton jButtonFind;
     private javax.swing.JButton jButtonLogout;
+    private com.toedter.calendar.JDateChooser jDateChooserDo;
+    private com.toedter.calendar.JDateChooser jDateChooserOd;
+    private javax.swing.JLabel jLabelFrom;
+    private javax.swing.JLabel jLabelTo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAccountant;
     // End of variables declaration//GEN-END:variables

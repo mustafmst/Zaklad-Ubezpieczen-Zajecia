@@ -27,7 +27,7 @@ public class SecretaryJFrame extends javax.swing.JFrame {
      * Creates new form SecretaryJFrame
      */
     public SecretaryJFrame() {
-        super("Welcome Secretary");
+        super("Welcome Secretary " + UserIdentify.imie + " " + UserIdentify.nazwisko);
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

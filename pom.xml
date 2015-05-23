@@ -61,6 +61,19 @@
             <version>1.52</version>
             <type>jar</type>
         </dependency>
+        <!--dodałem -->
+	<dependency>
+	<groupId>com.toedter</groupId>
+	<artifactId>jcalendar</artifactId>
+	<version>1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.swinglabs</groupId>
+            <artifactId>swingx</artifactId>
+            <version>1.6</version>
+            <type>jar</type>
+        </dependency>
     </dependencies> 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

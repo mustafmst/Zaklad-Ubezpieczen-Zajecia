@@ -23,7 +23,7 @@ public class AdvisorJFrame extends javax.swing.JFrame {
      * Creates new form AdvisorJFrame
      */
     public AdvisorJFrame() {
-        super("Welcome " + UserIdentify.imie + " " + UserIdentify.nazwisko);
+        super("Welcome Advisor " + UserIdentify.imie + " " + UserIdentify.nazwisko);
         initComponents();
         Container c = this.jPanel1;
         
