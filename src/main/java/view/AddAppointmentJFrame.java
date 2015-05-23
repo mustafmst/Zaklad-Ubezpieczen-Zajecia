@@ -23,7 +23,7 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
     private int day;
     private int month;
     private int year;
-    
+    private AppointmentsJFrame appoint;
     private Date date;
     @SuppressWarnings("FieldMayBeFinal")
     private Time hour = new Time(00,00,00);
@@ -42,12 +42,13 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
         setComboBox();
     }
     
-    public AddAppointmentJFrame(int dd, int mm, int yy) {
+    public AddAppointmentJFrame(int dd, int mm, int yy, AppointmentsJFrame appointmentsJFrame) {
         super();
         initComponents();
         this.day = dd;
         this.month = mm;
         this.year = yy;
+        this.appoint = appointmentsJFrame;
         date = new Date(yy-1900,mm-1,dd);
         addItem();
         setComboBox();
@@ -214,6 +215,11 @@ public class AddAppointmentJFrame extends javax.swing.JFrame {
 
                     this.appointmentModel.create(appointment);
                     JOptionPane.showMessageDialog(null, "Add new appointment successful");
+                    
+                    
+                    
+                    appoint.createTable();
+                    
                     dispose();
                     } catch (NumberFormatException | HeadlessException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());

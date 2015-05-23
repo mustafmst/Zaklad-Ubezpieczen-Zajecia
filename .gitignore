@@ -12,3 +12,6 @@ target/apidocs/package-list
 target/apidocs/script.js
 target/apidocs/stylesheet.css
 target/apidocs/packages
+target/Project-1.0-SNAPSHOT-jar-with-dependencies.jar
+*.jar
+*.jar
