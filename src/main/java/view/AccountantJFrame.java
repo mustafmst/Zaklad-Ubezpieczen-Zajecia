@@ -33,6 +33,8 @@ public class AccountantJFrame extends javax.swing.JFrame {
 
     private final ServiceModel serviceModel = new ServiceModel();
 
+    Date dateTo; 
+    Date dateFrom;
     /**
      * Creates new form AccountantJFrame
      */
@@ -41,6 +43,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        jButtonBack.setVisible(false);
         transactionView();
     }
     
@@ -48,6 +51,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         super("Transactions");
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jButtonLogout.setVisible(false);
         setVisible(true);
         transactionView();
     }
@@ -83,6 +87,7 @@ public class AccountantJFrame extends javax.swing.JFrame {
         jLabelTo = new javax.swing.JLabel();
         jButtonFind = new javax.swing.JButton();
         jButtonClear = new javax.swing.JButton();
+		
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
@@ -229,9 +234,9 @@ public class AccountantJFrame extends javax.swing.JFrame {
         }
 
         for (Service c : wynik) {
-            if (from == null && c.getDateOfService().getDate() < to.getDate()) {
+            if (from == null && c.getDateOfService().getDate() <= to.getDate()) {
                 model.addRow(new Object[]{c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko(), c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName(), c.getDescription(), c.getInsuranceCost(), c.getServiceCost(), c.getInsuranceCost() + c.getServiceCost(), c.getDateOfService()});
-            } else if (to == null && c.getDateOfService().getDate() > from.getDate()) {
+            } else if (to == null && c.getDateOfService().getDate() >= from.getDate()) {
                 model.addRow(new Object[]{c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko(), c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName(), c.getDescription(), c.getInsuranceCost(), c.getServiceCost(), c.getInsuranceCost() + c.getServiceCost(), c.getDateOfService()});
             } else if (from != null && to != null && c.getDateOfService().getDate() <= to.getDate() && c.getDateOfService().getDate() >= from.getDate()) {
                 model.addRow(new Object[]{c.getUserFk().getImie() + " " + c.getUserFk().getNazwisko(), c.getPeselFk().getFirstName() + " " + c.getPeselFk().getLastName(), c.getDescription(), c.getInsuranceCost(), c.getServiceCost(), c.getInsuranceCost() + c.getServiceCost(), c.getDateOfService()});
@@ -261,7 +266,15 @@ public class AccountantJFrame extends javax.swing.JFrame {
         }
 
         try {
-            new GeneratePDF().createPdf(filepath);
+            if(dateTo != null && dateFrom != null) {
+                new GeneratePDF(dateTo, dateFrom).createPdf(filepath);
+            } else if(dateTo != null) {
+                new GeneratePDF(dateTo, null).createPdf(filepath);
+            } else if(dateFrom != null) {
+                new GeneratePDF(null, dateFrom).createPdf(filepath);
+            } else {
+                new GeneratePDF().createPdf(filepath);
+            }
         } catch (DocumentException ex) {
             Logger.getLogger(AccountantJFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -291,8 +304,8 @@ public class AccountantJFrame extends javax.swing.JFrame {
 
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
         
-        Date dateTo = jDateChooserDo.getDate(); 
-        Date dateFrom = jDateChooserOd.getDate();
+        dateTo = jDateChooserDo.getDate(); 
+        dateFrom = jDateChooserOd.getDate();
         if (dateTo != null && dateFrom != null) {
             if (dateTo.getDate() >= dateFrom.getDate()) {
                 transactionViewWithDate(dateFrom, dateTo);

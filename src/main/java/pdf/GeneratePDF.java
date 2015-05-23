@@ -18,6 +18,7 @@ import com.itextpdf.text.Font.FontFamily;
 import entities.Service;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import model.ServiceModel;
 
@@ -26,6 +27,17 @@ import model.ServiceModel;
  * @author Piotr Filipowicz
  */
 public class GeneratePDF {
+    
+    public Date dateTo;
+    public Date dateFrom;
+    public GeneratePDF() {
+    
+    }
+    
+    public GeneratePDF(Date dateTo, Date dateFrom) {
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;      
+    }
     
  public void createPdf(String filename)
 	throws DocumentException, IOException {
@@ -46,6 +58,7 @@ public class GeneratePDF {
     
     private final ServiceModel serviceModel = new ServiceModel();
     
+ @SuppressWarnings("CallToPrintStackTrace")
     public PdfPTable createTable() {
 
         PdfPTable table = new PdfPTable(7);
@@ -61,7 +74,21 @@ public class GeneratePDF {
         List<Service> transactions = new ArrayList<>();
         try{
             for (Service c : this.serviceModel.findAll()) {
+            if(dateTo != null && dateFrom != null) {
+                if(c.getDateOfService().getDate() >= dateFrom.getDate() && c.getDateOfService().getDate() <= dateTo.getDate() ){
+                    transactions.add(c);
+                }
+            }else if(dateTo != null) {
+                if(c.getDateOfService().getDate() <= dateTo.getDate()){
+                    transactions.add(c);
+                }
+            } else if(dateFrom != null) {
+                if(c.getDateOfService().getDate() >= dateFrom.getDate()){
+                    transactions.add(c);
+                }
+            } else {
                 transactions.add(c);
+            }
             }
         }
         catch(Exception e){
