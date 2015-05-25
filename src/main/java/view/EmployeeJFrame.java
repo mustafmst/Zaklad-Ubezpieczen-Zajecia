@@ -11,6 +11,8 @@ package view;
  */
 import entities.User;
 import java.awt.HeadlessException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import model.UserModel;
 import model.UserStatus;
@@ -55,6 +57,10 @@ private final UserModel userModel = new UserModel();
         jLabelPassword.setText("Password");
 
         jLabelStatus.setText("Status");
+
+        jTextFieldLogin.setToolTipText("3-12 characters");
+
+        jTextFieldPassword.setToolTipText("6-12 characters");
 
         jButtonAddNewEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-add1.png"))); // NOI18N
         jButtonAddNewEmployee.setText("Add");
@@ -118,7 +124,7 @@ private final UserModel userModel = new UserModel();
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addComponent(jTextFieldLogin)
                     .addComponent(jLabelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -167,7 +173,31 @@ private final UserModel userModel = new UserModel();
             }
             String showInputDialog = null;
             boolean isFill = true;
-
+                
+             if((FirstNameValidation(imie))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid First Name. Please enter correct First Name."); 
+                return;
+            }else 
+                
+            if((LastNameValidation(nazwisko))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Last Name. Please enter correct Last Name."); 
+                return;
+            }else
+            
+             if((LoginValidation(login))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Login. Please enter correct Login.(3-12 characters)"); 
+                return;
+            }else
+                 
+             if((PasswordValidation(password))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Password. Please enter correct Password.(6-12 characters)"); 
+                return;
+            }else
+                 
             if (login.isEmpty()) {
                 showInputDialog = "login";
                 isFill = false;
@@ -219,7 +249,40 @@ private final UserModel userModel = new UserModel();
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
-
+    
+      public boolean FirstNameValidation(String employeeFirstName)
+    {
+       String regex = "[a-zA-ZęóąśłżźćńĘÓŚĄŁŻŹĆŃ]{3,12}";
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(employeeFirstName);      
+       return matcher.matches();
+    }
+       
+    public boolean LastNameValidation(String employeeLastName)
+    {
+       String regex = "[a-zA-ZęóąśłżźćńĘÓŚĄŁŻŹĆŃ]{3,12}-?[a-zA-ZęóąśłżźćńĘÓŚĄŁŻŹĆŃ]*"; 
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(employeeLastName);      
+       return matcher.matches();
+    } 
+    
+    public boolean LoginValidation(String employeeLogin)
+    {
+       String regex = ".{3,12}";
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(employeeLogin);      
+       return matcher.matches();
+    }
+       
+    public boolean PasswordValidation(String employeePassword)
+    {
+       String regex = ".{6,12}"; 
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(employeePassword);      
+       return matcher.matches();
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

@@ -66,6 +66,10 @@ public class CustomerJFrame extends javax.swing.JFrame {
 
         jLabel6.setText("E-mail");
 
+        jTextFieldAdress.setToolTipText("e.g. Street22 33-101 City");
+
+        jTextFieldEmail.setToolTipText("e.g. mail@gmail.com");
+
         jButtonAddNewCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-add1.png"))); // NOI18N
         jButtonAddNewCustomer.setText("Add New");
         jButtonAddNewCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -96,17 +100,23 @@ public class CustomerJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextFieldPesel, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                        .addComponent(jTextFieldLastName)
-                        .addComponent(jTextFieldPhone)
-                        .addComponent(jTextFieldAdress)
-                        .addComponent(jTextFieldEmail))
-                    .addComponent(jButtonAddNewCustomer, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(jButtonAddNewCustomer))
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldPesel, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                .addComponent(jTextFieldLastName)
+                                .addComponent(jTextFieldPhone)
+                                .addComponent(jTextFieldAdress))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +172,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
             boolean isFill = true;
             if((EmailValidation(email))==false)
             {
-                JOptionPane.showMessageDialog(null, "Invalid email. Please enter correct email.");
+                JOptionPane.showMessageDialog(null, "Invalid email. Please enter correct email. E.g. mail@gmail.com");
                 return;
             }else
                 
@@ -190,7 +200,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
                 return;
             }else if((AdressValidation(adress))==false)
             {
-                JOptionPane.showMessageDialog(null, "Invalid Adress. Please enter correct adress."); 
+                JOptionPane.showMessageDialog(null, "Invalid Adress. Please enter correct adress. E.g. Street22 33-101 City"); 
                 return;
             }else if (email.isEmpty()) {
                 showInputDialog = "email";
@@ -312,7 +322,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
        
     public boolean FirstNameValidation(String customerFirstName)
     {
-       String regex = "[a-zA-Z]{3,12}";
+       String regex = "[a-zA-ZęóąśłżźćńĘÓŚĄŁŻŹĆŃ]{3,12}";
        Pattern pattern = Pattern.compile(regex);
        Matcher matcher = pattern.matcher(customerFirstName);      
        return matcher.matches();
@@ -320,7 +330,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
        
     public boolean LastNameValidation(String customerLastName)
     {
-       String regex = "[a-zA-Z]{3,12}-?[a-zA-Z]*"; 
+       String regex = "[a-zA-ZęóąśłżźćńĘÓŚĄŁŻŹĆŃ]{3,12}-?[a-zA-ZęóąśłżźćńĘÓŚĄŁŻŹĆŃ]*"; 
        Pattern pattern = Pattern.compile(regex);
        Matcher matcher = pattern.matcher(customerLastName);      
        return matcher.matches();
@@ -336,7 +346,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
        
     public boolean AdressValidation(String customerAdress)
     {
-       String regex = "[a-zA-Z]{2,15}.+ [0-9]{2}-([0-9]){3}( [a-zA-Z]{2,15})";
+       String regex = "[a-zA-ZęóąśłżźćńĘÓŚĄŁŻŹĆŃ]{2,15}.+ [0-9]{2}-([0-9]){3}( [a-zA-ZęóąśłżźćńĘÓŚĄŁŻŹĆŃ]{2,15})";
        Pattern pattern = Pattern.compile(regex);
        Matcher matcher = pattern.matcher(customerAdress);       
        return matcher.matches();
