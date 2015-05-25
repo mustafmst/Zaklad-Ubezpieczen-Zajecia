@@ -16,6 +16,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import model.CustomerModel;
@@ -86,12 +88,14 @@ public class ServiceJFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Service Description");
 
+        jTextFieldInsuranceCost.setToolTipText("e.g. 120.99");
         jTextFieldInsuranceCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldInsuranceCostActionPerformed(evt);
             }
         });
 
+        jTextFieldServiceCost.setToolTipText("e.g. 120.99");
         jTextFieldServiceCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldServiceCostActionPerformed(evt);
@@ -109,6 +113,7 @@ public class ServiceJFrame extends javax.swing.JFrame {
         jTextAreaDescription.setColumns(5);
         jTextAreaDescription.setLineWrap(true);
         jTextAreaDescription.setRows(5);
+        jTextAreaDescription.setToolTipText("10-255 characters");
         jScrollPane1.setViewportView(jTextAreaDescription);
 
         jButtonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/go-previous1.png"))); // NOI18N
@@ -186,9 +191,27 @@ public class ServiceJFrame extends javax.swing.JFrame {
 
         Service service = new Service();
         String pesel = jComboBoxPesel.getSelectedItem().toString();
-        Float serviceCost = Float.parseFloat(this.jTextFieldServiceCost.getText());
-        Float insuranceCost = Float.parseFloat(this.jTextFieldInsuranceCost.getText());
+        String sCost =this.jTextFieldServiceCost.getText();
+        String iCost =this.jTextFieldInsuranceCost.getText();
         String description = this.jTextAreaDescription.getText();
+        if((ServiceCostValidation(sCost))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Service Cost. Please enter correct. E.g. 120.99"); 
+                return;
+            }else 
+        if((InsuranceCostValidation(iCost))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Insurance Cost. Please enter correct. E.g. 120.99"); 
+                return;
+            }
+         if((ServiceDescriptionValidation(description))==false)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid description. Please enter correct description(10-255 characters)"); 
+                return;
+            }
+        Float serviceCost = Float.parseFloat(sCost);
+        Float insuranceCost = Float.parseFloat(iCost);
+        
         Calendar cal = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy");  
         if (pesel.isEmpty() || serviceCost == null || insuranceCost == null || description.isEmpty()) {
@@ -243,6 +266,29 @@ public class ServiceJFrame extends javax.swing.JFrame {
            model.addElement(customer.getPesel());
        }   
     }
+       public boolean ServiceCostValidation(String serviceCost)
+    {
+       String regex = "[0-9]+\\.?[0-9]+";
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(serviceCost);      
+       return matcher.matches();
+    }
+       
+    public boolean InsuranceCostValidation(String insuranceCost)
+    {
+       String regex = "[0-9]+\\.?[0-9]+"; 
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(insuranceCost);      
+       return matcher.matches();
+    } 
+    
+    public boolean ServiceDescriptionValidation(String serviceDescription)
+    {
+       String regex = ".{10,255}"; 
+       Pattern pattern = Pattern.compile(regex);
+       Matcher matcher = pattern.matcher(serviceDescription);      
+       return matcher.matches();
+    } 
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
