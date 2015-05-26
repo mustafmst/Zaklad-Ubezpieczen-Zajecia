@@ -43,7 +43,11 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
         this.year = yy;    
         date = new Date(yy,(mm+1),dd);
         firstOpen = true;
-        createTable();     
+        if(UserIdentify.status == UserStatus.ADVISOR){
+            this.JButtonSell.setEnabled(true);
+        }
+        createTable();
+        
     }
 
     /**
@@ -56,6 +60,24 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
     public final void createTable(){
         Customer tmp;
         DefaultTableModel model = (DefaultTableModel) this.jAppointmentTable.getModel();
+        if(UserIdentify.status == UserStatus.ADVISOR){
+            if(firstOpen){
+                model.addColumn(UserIdentify.imie+" "+UserIdentify.nazwisko);
+            }
+            List<Appointment> app = new ArrayList<>();
+        for(Appointment A : this.appointment.findAppointment(date)){
+            if(A.getId_advisor()==UserIdentify.userId){
+                app.add(A);
+            }
+            
+        }
+        for(Appointment A : app){
+            tmp = this.customer.find(A.getPesel());
+            model.setValueAt(tmp.getFirstName()+" "+tmp.getLastName(), A.getHours().getHours()-8,0 );
+        }
+        }
+        else{
+            
         Vector<Integer> advisors = new Vector<>();
         for(User A : this.user.findId_advisors()){
             advisors.addElement(A.getUserId());
@@ -72,7 +94,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
             tmp = this.customer.find(A.getPesel());
             model.setValueAt(tmp.getFirstName()+" "+tmp.getLastName(), A.getHours().getHours()-8,advisors.indexOf(A.getId_advisor()) );
         }
-        
+        }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -83,6 +105,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        JButtonSell = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Appointments");
@@ -144,6 +167,15 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
             }
         });
 
+        JButtonSell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list-add1.png"))); // NOI18N
+        JButtonSell.setText("Sell");
+        JButtonSell.setEnabled(false);
+        JButtonSell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonSellActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,8 +186,11 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
                     .addComponent(jButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JButtonSell, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
@@ -167,10 +202,12 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JButtonSell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -184,6 +221,11 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
         AddAppointmentJFrame addAppointmentFrame = new AddAppointmentJFrame(day,month,year,this);
         addAppointmentFrame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void JButtonSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonSellActionPerformed
+        ServiceJFrame serviceJFrame = new ServiceJFrame(day, month, year);
+            serviceJFrame.setVisible(true);
+    }//GEN-LAST:event_JButtonSellActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,6 +264,7 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JButtonSell;
     private javax.swing.JTable jAppointmentTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBack;

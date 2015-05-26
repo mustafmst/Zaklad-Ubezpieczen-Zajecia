@@ -342,8 +342,10 @@ public final class Cal extends JPanel {
             AppointmentsJFrame appointmentsJFrame = new AppointmentsJFrame(activeDay, mm, yy);
             appointmentsJFrame.setVisible(true);
         } else if (firstOpenAdvisor == false && UserIdentify.status == UserStatus.ADVISOR) {
-            ServiceJFrame serviceJFrame = new ServiceJFrame(activeDay, mm, yy);
-            serviceJFrame.setVisible(true);
+            /*ServiceJFrame serviceJFrame = new ServiceJFrame(activeDay, mm, yy);
+            serviceJFrame.setVisible(true);*/
+            AppointmentsJFrame appointmentsJFrame = new AppointmentsJFrame(activeDay, mm, yy);
+            appointmentsJFrame.setVisible(true);
         }
     }
 
