@@ -45,7 +45,10 @@ public class AppointmentsJFrame extends javax.swing.JFrame {
         firstOpen = true;
         if(UserIdentify.status == UserStatus.ADVISOR){
             this.JButtonSell.setEnabled(true);
-            this.jButton1.setEnabled(false);
+            this.jButton1.setVisible(false);
+        }else
+        {
+            this.JButtonSell.setVisible(false);
         }
         createTable();
         

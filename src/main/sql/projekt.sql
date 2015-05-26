@@ -134,12 +134,35 @@ begin
     
     while( i < zm ) do
 			INSERT INTO Appointment (pesel,id_advisor,dateofAddAppointment,hours)
-            VALUES (pesel,5,CURDATE()-i, '09:00:00'),
-				   (pesel,5,CURDATE()-i, '10:00:00'),
-				   (pesel,5,CURDATE()-i, '11:00:00'),
-				   (pesel,5,CURDATE()-i, '12:00:00'),
-                   (pesel,5,CURDATE()-i, '13:00:00'),
-                   (pesel,5,CURDATE()-i, '14:00:00');
+            VALUES (pesel,5,CURDATE()-i+3, '08:00:00'),
+				   (pesel,5,CURDATE()-i+3, '09:00:00'),
+				   (pesel,5,CURDATE()-i+3, '10:00:00'),
+				   (pesel,5,CURDATE()-i+3, '11:00:00'),
+				   (pesel,5,CURDATE()-i+3, '12:00:00'),
+                   (pesel,5,CURDATE()-i+3, '13:00:00'),
+                   (pesel,5,CURDATE()-i+3, '14:00:00'),
+                   (pesel,2,CURDATE()-i+3, '08:00:00'),
+				   (pesel,2,CURDATE()-i+3, '09:00:00'),
+				   (pesel,2,CURDATE()-i+3, '10:00:00'),
+				   (pesel,2,CURDATE()-i+3, '11:00:00'),
+				   (pesel,2,CURDATE()-i+3, '12:00:00'),
+                   (pesel,2,CURDATE()-i+3, '13:00:00'),
+                   (pesel,2,CURDATE()-i+3, '14:00:00'),
+                   
+                   (pesel,5,CURDATE()-i-10, '08:00:00'),
+				   (pesel,5,CURDATE()-i-10, '09:00:00'),
+				   (pesel,5,CURDATE()-i-10, '10:00:00'),
+				   (pesel,5,CURDATE()-i-10, '11:00:00'),
+				   (pesel,5,CURDATE()-i-10, '12:00:00'),
+                   (pesel,5,CURDATE()-i-10, '13:00:00'),
+                   (pesel,5,CURDATE()-i-10, '14:00:00'),
+                   (pesel,2,CURDATE()-i-10, '08:00:00'),
+				   (pesel,2,CURDATE()-i-10, '09:00:00'),
+				   (pesel,2,CURDATE()-i-10, '10:00:00'),
+				   (pesel,2,CURDATE()-i-10, '11:00:00'),
+				   (pesel,2,CURDATE()-i-10, '12:00:00'),
+                   (pesel,2,CURDATE()-i-10, '13:00:00'),
+                   (pesel,2,CURDATE()-i-10, '14:00:00');
 		set i = i + 1;
 	end while;
 end$$
@@ -235,11 +258,11 @@ DELIMITER ;
 
 /*********************wywołania procedur***************************/
 
-call addAppointment(10,'987654321');
+#call addAppointment(10,'987654321');
 
-call addAppointment(5,'543267890');
+#call addAppointment(5,'543267890');
 
-call addAppointment(10,'333333333');
+call addAppointment(5,'333333333');
 
 call addService(10,'123456789',2);
 
@@ -248,4 +271,3 @@ call addService(6,'987654321',3);
 call addService(5,'333333333',1);
 
 call ProcedureTempLogin();
-
